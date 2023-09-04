@@ -13,16 +13,16 @@ const SignUpPage = () => {
       <div className='flex mx-auto max-w-[1640px] h-fit rounded-lg shadow-md'>  
 
         <div className='relative rounded-l-lg rounded-r-lg w-[350px] mobile-400:w-[400px] md:w-[500px] lg:rounded-r-none h-fit py-12 px-5 text-xs bg-white flex items-center flex-col'>
-          <div className='absolute flex justify-center items-center z-10 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-500 h-20 w-20 border-transparent border-none rounded-full overflow-hidden'>
+          <div className='absolute flex justify-center items-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-500 h-20 w-20 border-transparent border-none rounded-full overflow-hidden'>
             <TbDogBowl className='text-white w-14 h-14'/>
           </div>
               <h1 className='text-lg font-bold text-sky-700'>Sign Up Now</h1>
               
-          <form action="" className='w-full flex flex-col justify-center '>
+          <form action="" className='w-full flex flex-col justify-center text-lg'>
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='firstname'
-              className='w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className='w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="firstname"
@@ -35,7 +35,7 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='lastname'
-              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="lastname"
@@ -48,7 +48,7 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='date'
-              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="date"
@@ -61,7 +61,7 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='email'
-              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type='email' 
               placeholder=' '/>
               <label htmlFor="email"
@@ -74,7 +74,7 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='password'
-              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={inputType}
               placeholder=' '/>
 
@@ -95,7 +95,7 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='confirmPassword'
-              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={confirmInputType}
               placeholder=' '/>
               <button
