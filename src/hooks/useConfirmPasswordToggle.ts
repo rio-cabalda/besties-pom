@@ -1,5 +1,11 @@
 import { useState } from 'react';
 
+type TPassword = {
+  confirmVisible: boolean;
+  toggleConfirmPasswordVisibility: ()=>void;
+  confirmInputType: string;
+}
+
 function useConfirmPasswordToggle() {
   const [confirmVisible, setConfirmVisible] = useState(false);
 
@@ -9,7 +15,7 @@ function useConfirmPasswordToggle() {
 
   const confirmInputType = confirmVisible ? 'text' : 'password';
 
-  return { confirmVisible, toggleConfirmPasswordVisibility, confirmInputType };
+  return<TPassword> { confirmVisible, toggleConfirmPasswordVisibility, confirmInputType };
 }
 
 export default useConfirmPasswordToggle;

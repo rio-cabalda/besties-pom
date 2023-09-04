@@ -1,4 +1,4 @@
-import { FaUser } from 'react-icons/fa';
+import { TbDogBowl } from 'react-icons/tb';
 import { BiSolidHide, BiShow } from 'react-icons/bi';
 import {usePasswordToggle, useConfirmPasswordToggle} from '../../hooks';
 
@@ -8,22 +8,25 @@ const SignUpPage = () => {
   const { confirmVisible, toggleConfirmPasswordVisibility, confirmInputType } = useConfirmPasswordToggle();
 
   return (
-    <main className='h-screen bg-sky-300 py-16 px-10 '>
+    <main className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>
 
-        <div className='relative max-w-[1640px] mx-auto  p-4 pt-16 text-xs bg-white sm:w-[95%] flex items-center flex-col rounded-lg shadow-md '>
-          <div className='absolute flex justify-center items-end z-10 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-600 h-20 w-20 rounded-full overflow-hidden border-transparent border-none'>
-            <FaUser className='text-white w-16 h-16'/>
+      <div className='flex mx-auto max-w-[1640px] h-fit rounded-lg shadow-md'>  
+
+        <div className='relative rounded-l-lg rounded-r-lg w-[350px] mobile-400:w-[400px] md:w-[500px] lg:rounded-r-none h-fit py-12 px-5 text-xs bg-white flex items-center flex-col'>
+          <div className='absolute flex justify-center items-center z-10 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-500 h-20 w-20 border-transparent border-none rounded-full overflow-hidden'>
+            <TbDogBowl className='text-white w-14 h-14'/>
           </div>
               <h1 className='text-lg font-bold text-sky-700'>Sign Up Now</h1>
-          <form action="" className='w-full flex flex-col justify-center'>
+              
+          <form action="" className='w-full flex flex-col justify-center '>
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='firstname'
-              className='w-full h-10 border-[2px] border-transparent border-b-2 border-b-sky-200 px-5 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className='w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="firstname"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
+              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
               peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
               peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >First name</label>
@@ -32,11 +35,11 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='lastname'
-              className='w-full h-10 border-[2px] border-transparent border-b-2 border-b-sky-200 px-5 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="lastname"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
+              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
               peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
               peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Last name</label>
@@ -45,11 +48,11 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='date'
-              className='w-full h-10 border-[2px] border-transparent border-b-2 border-b-sky-200 px-5 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="date"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
+              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
               peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
               peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Birthday</label>
@@ -58,11 +61,11 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='email'
-              className='w-full h-10 border-[2px] border-transparent border-b-2 border-b-sky-200 px-5 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type='email' 
               placeholder=' '/>
               <label htmlFor="email"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
+              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
               peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
               peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Email</label>
@@ -71,7 +74,7 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='password'
-              className='w-full h-10 border-[2px] border-transparent border-b-2 border-b-sky-200 px-5 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={inputType}
               placeholder=' '/>
 
@@ -83,7 +86,7 @@ const SignUpPage = () => {
                       {visible ? <BiSolidHide/> : <BiShow/> }
               </button>
               <label htmlFor="password"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
+              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
               peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
               peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Password</label>
@@ -92,7 +95,7 @@ const SignUpPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='confirmPassword'
-              className='w-full h-10 border-[2px] border-transparent border-b-2 border-b-sky-200 px-5 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-8 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={confirmInputType}
               placeholder=' '/>
               <button
@@ -103,17 +106,23 @@ const SignUpPage = () => {
                       {confirmVisible ? <BiSolidHide/> : <BiShow/> }
               </button>
               <label htmlFor="confirmPassword"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
+              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
               peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
               peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Confirm password</label>
             </div>
 
             <button className=' mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Sign up</button>
-        </form>
+          </form>
+        </div>
+
+        <div className='hidden w-[500px] lg:block flex-grow bg-white rounded-r-lg overflow-hidden'>
+          
+            <img className='h-full w-full object-cover ' src="https://besttopets.com/wp-content/uploads/2023/05/White-Pomeranian-Dog-5.jpg" alt="Sign up image" />
+            
+        </div>
       </div>
-   
-    </main>
+   </main>
   )
 }
 

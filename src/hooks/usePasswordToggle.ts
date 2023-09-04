@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-function usePasswordToggle() {
+type TPassword = {
+    visible: boolean;
+    togglePasswordVisibility: ()=>void;
+    inputType: string;
+}
+
+const usePasswordToggle = () =>{
   const [visible, setVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -9,7 +15,7 @@ function usePasswordToggle() {
 
   const inputType = visible ? 'text' : 'password';
 
-  return { visible, togglePasswordVisibility, inputType };
+  return<TPassword> { visible, togglePasswordVisibility, inputType };
 }
 
 export default usePasswordToggle;
