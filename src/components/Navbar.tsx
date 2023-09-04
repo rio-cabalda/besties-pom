@@ -17,7 +17,7 @@ const Navbar = () => {
             <div onClick={()=>setIsSidbarOpen(!isSidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
                 <AiOutlineMenu size={30} />
             </div>
-            <Link to='/'>
+            <Link to='/' className='flex items-center'>
             <img src={logo} alt="Logo" className="hidden md:block w-14 h-14 " />
             <h1 className='text-xl transform  mobile-400:text-xl  md:text-2xl lg:text-3xl px-2 mr-2 leading-tight'>
               Besties
