@@ -17,11 +17,13 @@ const Navbar = () => {
             <div onClick={()=>setIsSidbarOpen(!isSidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
                 <AiOutlineMenu size={30} />
             </div>
+            <Link to='/'>
             <img src={logo} alt="Logo" className="hidden md:block w-14 h-14 " />
             <h1 className='text-xl transform  mobile-400:text-xl  md:text-2xl lg:text-3xl px-2 mr-2 leading-tight'>
               Besties
               <span className='font-bold'> Pom</span>
             </h1>
+            </Link>
             {/* Pick up/Delivery Option */}
             {/* <div className='hidden lg:flex items-center bg-gray-200 rounded-full p-1 text-[14px]'>
                 <p className='bg-blue-500 text-white rounded-full p-2'>Delivery</p>
