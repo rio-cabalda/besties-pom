@@ -1,5 +1,5 @@
 import React from "react";
-import {SignIn} from "./auth";
+import {SignUp} from "./pages/auth";
 
 function App() {
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       {/* </Navbar> */}
-      <SignIn/>
+      <SignUp/>
       {/* </Footer> */}
     </>
   )
