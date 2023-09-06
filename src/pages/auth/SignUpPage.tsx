@@ -1,14 +1,59 @@
 import { TbDogBowl } from 'react-icons/tb';
 import { BiSolidHide, BiShow } from 'react-icons/bi';
 import {usePasswordToggle, useConfirmPasswordToggle} from '../../hooks';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signupSchema, TSignUpSchema } from '../../types/SignUpTypes';
+import axios from 'axios';
+import toast  from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
+export type UserType = {
+  firstname: string;
+  lastname: string;
+  birthdate: Date;
+  email: string;
+  password: string;
+}
 
 const SignUpPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
   const { confirmVisible, toggleConfirmPasswordVisibility, confirmInputType } = useConfirmPasswordToggle();
+  const {
+    register,
+    handleSubmit,
+    formState: {errors,isSubmitting},
+    reset,
+  } = useForm<TSignUpSchema>({
+    resolver: zodResolver(signupSchema)
+  });
+  const navigate = useNavigate();
 
+  const onSubmit = async(data: TSignUpSchema) =>{
+    const response = await axios.post('http://localhost:8080/user/register', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    // const responseData = response.data as UserType;
+    // console.log('Response type:', typeof response);
+    // console.log('Response data:', response.status);
+
+    if (response.status === 201) {
+      // Success: HTTP status code 200
+      toast.success(<b>Congratulations! Welcome to our community of pet lovers!</b>,{duration: 3000});
+       navigate('/signin');
+    } else {
+      toast.error(<b>Could not save.</b>);
+    }
+      reset();
+      
+  }
+
+  
   return (
-    <main className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>
+    <main className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex '>
 
       <div className='flex mx-auto max-w-[1640px] h-fit rounded-lg shadow-md'>  
 
@@ -18,101 +63,116 @@ const SignUpPage = () => {
           </div>
               <h1 className='text-lg font-bold text-sky-700'>Sign Up Now</h1>
               
-          <form action="" className='w-full flex flex-col justify-center text-lg'>
-            <div className='mt-3 h-10 relative flex'>
+          <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col justify-center'>
+
+{/* Firstname */}        
+            <div className='mt-3 relative flex flex-col'>
               <input 
+              {...register('firstname')}
               id='firstname'
-              className='w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className='w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="firstname"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >First name</label>
+              <div className='min-h-[1.5rem] w-full px-2'>
+                {errors.firstname && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.firstname.message}</span>)}
+              </div>
             </div>
-
-            <div className='mt-3 h-10 relative flex'>
+{/* Lastname */}
+            <div className='mt-3 relative flex flex-col'>
               <input 
+              {...register('lastname')}
               id='lastname'
-              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="lastname"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Last name</label>
+              <div className='min-h-[1.5rem] w-full px-2'>
+                {errors.lastname && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.lastname.message}</span>)}
+              </div>
             </div>
-
-            <div className='mt-3 h-10 relative flex'>
+{/* Birthdate */}
+            <div className='mt-3 relative flex flex-col'>
               <input 
+              {...register('birthdate')}
               id='date'
-              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="date"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
-              >Birthday</label>
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              >Birth date</label>
+              <div className='min-h-[1.5rem] w-full px-2'>
+                {errors.birthdate && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.birthdate.message}</span>)}
+              </div>
             </div>
-
-            <div className='mt-3 h-10 relative flex'>
+{/* email */}
+            <div className='mt-3 relative flex flex-col'>
               <input 
+              {...register('email')}
               id='email'
-              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type='email' 
               placeholder=' '/>
               <label htmlFor="email"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Email</label>
+              <div className='min-h-[1.5rem] w-full px-2'>
+                {errors.email && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.email.message}</span>)}
+              </div>
             </div>
-
-            <div className='mt-3 h-10 relative flex'>
+{/* Password */}
+            <div className='mt-3 relative flex flex-col'>
               <input 
+              {...register('password')}
               id='password'
-              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={inputType}
               placeholder=' '/>
 
               <button
                       type="button"
-                      className="absolute bg-transparent text-lg inset-y-0 right-0 px-2 py-1 bg-gray-300 hover:scale-110 rounded-r cursor-pointer"
+                      className="absolute bg-transparent text-lg top-1 right-0 px-2 py-1 bg-gray-300 hover:scale-110 rounded-r cursor-pointer outline-none"
                       onClick={togglePasswordVisibility}
                     >
                       {visible ? <BiSolidHide/> : <BiShow/> }
               </button>
               <label htmlFor="password"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Password</label>
+              <div className='min-h-[1.5rem] w-full px-2'>
+                {errors.password && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.password.message}</span>)}
+              </div>
+              
             </div>
-
-            <div className='mt-3 h-10 relative flex'>
+{/* Confirm password */}
+            <div className='mt-3 relative flex flex-col'>
               <input 
+              {...register('confirmPassword')}
               id='confirmPassword'
-              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={confirmInputType}
               placeholder=' '/>
               <button
                       type="button"
-                      className="absolute bg-transparent text-lg inset-y-0 right-0 px-2 py-1 bg-gray-300 hover:scale-110 rounded-r cursor-pointer"
+                      className="absolute bg-transparent text-lg top-1 right-0 px-2 py-1 bg-gray-300 hover:scale-110 rounded-r cursor-pointer outline-none"
                       onClick={toggleConfirmPasswordVisibility}
                     >
                       {confirmVisible ? <BiSolidHide/> : <BiShow/> }
               </button>
               <label htmlFor="confirmPassword"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Confirm password</label>
+              <div className='min-h-[1.5rem] w-full px-2'>
+                {errors.confirmPassword && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.confirmPassword.message}</span>)}
+              </div>
             </div>
 
-            <button className=' mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Sign up</button>
+            <button disabled={isSubmitting} className={`mt-10 bg-blue-500  text-white text-lg font-bold py-2 px-4 rounded ${isSubmitting ? 'opacity-50':'hover:bg-blue-700'}`}>Sign up</button>
           </form>
         </div>
 

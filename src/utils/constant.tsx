@@ -1,52 +1,37 @@
-import {TbTruckDelivery} from 'react-icons/tb'
-import {MenuItemType,HeadlineItemType} from '../types'
-import { BsFillSaveFill } from 'react-icons/bs'
-import { AiFillTag } from 'react-icons/ai'
-import { MdFavorite, MdHelp } from 'react-icons/md'
-import { FaUserFriends, FaWallet } from 'react-icons/fa'
 
+import {MenuItemType,HeadlineItemType} from '../types';
+import { ImHome } from 'react-icons/im';
+import {FaBoxOpen, FaShoppingCart, FaUserPlus, FaInfoCircle} from 'react-icons/fa';
 
-export const menuList:MenuItemType[] = [
+export const sidebarLinks:MenuItemType[] = [
     {
         id: 1,
-        title: 'Orders',
-        icon: <TbTruckDelivery size={25} className='mr-4'/>,
-        link: '/orders'
+        title: 'Home',
+        icon: <ImHome />,
+        link: '/'
     },
     {
         id: 2,
-        title: 'Fevorites',
-        icon: <MdFavorite size={25} className='mr-4'/>,
-        link: '/fevorites'
+        title: 'About',
+        icon: <FaInfoCircle />,
+        link: '/about'
     },
     {
         id: 3,
-        title: 'Wallet',
-        icon: <FaWallet size={25} className='mr-4'/>,
-        link: '/wallet'
+        title: 'Products',
+        icon: <FaBoxOpen />,
+        link: '/products'
     },
     {
         id: 4,
-        title: 'Help',
-        icon: <MdHelp size={25} className='mr-4'/>,
-        link: '/help'
+        title: 'Cart',
+        icon: <FaShoppingCart />,
+        link: '/cart'
     },
     {
         id: 5,
-        title: 'Promotions',
-        icon: <AiFillTag size={25} className='mr-4'/>,
-        link: '/promotions'
-    },
-    {
-        id: 6,
-        title: 'Best One',
-        icon: <BsFillSaveFill size={25} className='mr-4'/>,
-        link: '/best'
-    },
-    {
-        id: 7,
         title: 'Sign in',
-        icon: <FaUserFriends size={25} className='mr-4'/>,
+        icon: <FaUserPlus />,
         link: '/signin'
     },
 ]
@@ -72,7 +57,7 @@ export const headlineList:HeadlineItemType[] = [
     }, 
 ]
 
-export const links = [
+export const navLinks = [
     {
       id: 1,
       text: 'home',
