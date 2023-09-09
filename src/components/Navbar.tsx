@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {AiOutlineClose, AiOutlineMenu, AiOutlineSearch} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
+import { BsBag } from 'react-icons/bs';
 import { sidebarLinks, navLinks } from '../utils/constant';
 import {MenuItemType} from '../types';
 import logo from '../assets/logo.png';
@@ -11,19 +11,22 @@ const Navbar = () => {
   
 
   return (
-    <div className='max-w-[1170px] mx-auto flex justify-between items-center p-4 xl:px-0'>
+    <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
         {/* left side */}
         <div className='flex items-center'>
-            <div onClick={()=>setIsSidbarOpen(!isSidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
-                <AiOutlineMenu size={30} />
+            
+            <div className='flex items-center gap-2 mr-4 mobile-400:mr-0'>
+              <button onClick={()=>setIsSidbarOpen(!isSidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
+                  <AiOutlineMenu size={30} />
+              </button>
+              <Link to='/' className='flex items-center'>
+                <img src={logo} alt="Logo" className="w-14 h-14 " />
+                <h1 className='hidden md:block text-2xl transform lg:text-3xl px-2 leading-tight'>
+                  Besties
+                  <span className='font-bold'> Pom</span>
+                </h1>
+              </Link>
             </div>
-            <Link to='/' className='flex items-center'>
-            <img src={logo} alt="Logo" className="hidden md:block w-14 h-14 " />
-            <h1 className='text-xl transform  mobile-400:text-xl  md:text-2xl lg:text-3xl px-2 mr-2 leading-tight'>
-              Besties
-              <span className='font-bold'> Pom</span>
-            </h1>
-            </Link>
             {/* Pick up/Delivery Option */}
             {/* <div className='hidden lg:flex items-center bg-gray-200 rounded-full p-1 text-[14px]'>
                 <p className='bg-blue-500 text-white rounded-full p-2'>Delivery</p>
@@ -32,13 +35,13 @@ const Navbar = () => {
         </div>
 
         {/* search input */}
-        <div className='bg-gray-200 rounded-full flex items-center px-2 flex-1  max-w-lg '>
+        <div className='bg-gray-200 px-2 md:mx-6 rounded-full flex items-center  flex-1  max-w-lg '>
           <AiOutlineSearch size={25} />
           <input className='bg-transparent p-2 w-full focus:outline-none' type="text" name="search" id="search" placeholder='search product' />
         </div>
 
         {/* Links */}
-        <ul className='hidden md:flex capitalize justify-center items-center px-7'>
+        <ul className='hidden md:flex capitalize justify-center items-center'>
           {navLinks.map((link)=>{
             const {id, text, url}= link;
 
@@ -51,14 +54,20 @@ const Navbar = () => {
           })}
           </ul>
 
-        {/* cart button */}
-        <a href='/cart' className='hidden md:flex text-lg gap-1 ml-2 mr-4'>
-                Cart
-            <span className='relative flex justify-center items-center text-2xl '>
-                <FaShoppingCart />
-                <span className='absolute -top-2.5 -right-3 text-sm leading-0 w-6 h-6 bg-sky-300 rounded-full leading-none flex items-center px-0.5'>10</span>
+        {/* cart button and log in */}
+        <div className='hidden relative md:flex gap-2'>
+          <a href='/cart' className=' flex justify-center items-center text-lg gap-1 ml-2 mr-4'>
+            <span className='relative text-xl '>
+                  <BsBag />
+                  <span className='absolute top-[7px] left-[1.5px]  text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
             </span>
-        </a>
+          </a>
+
+          <button className='transition-all transform font-bold hover:scale-105 duration-300 hover:text-sky-500'>
+            Sign In
+          </button>
+        </div>
+        
 
         {/* mobile menu */}
         {/* overlay */}
@@ -85,7 +94,7 @@ const Navbar = () => {
               </ul>
             </nav>
         </div>
-    </div>
+    </nav>
   )
 }
 

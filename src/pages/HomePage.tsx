@@ -3,7 +3,7 @@ import Hero from '../components/Hero'
 
 const HomePage = () => {
   return (
-    <main className='max-w-[1170px] mx-auto flex justify-between items-center p-4 xl:p-0 bg-gray-500'>
+    <main className='max-w-screen-xl mx-auto flex justify-between items-center bg-gray-500'>
       <Hero/>
   </main>
   )
