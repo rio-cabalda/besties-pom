@@ -10,6 +10,7 @@
 .slick-dots {
     position: absolute;
     bottom: 0;
+    padding-bottom: 1rem;
 }
 
 .slick-dots li button:before {

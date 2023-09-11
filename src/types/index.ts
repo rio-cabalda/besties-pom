@@ -11,3 +11,14 @@ export type MenuItemType = {
     description: string;
     image: string;
  }
+
+export type TProductItem = {
+   _id: string;
+   category: string;
+   description: string;
+   image: string;
+   name: string;
+   price: number;
+   rating: number;
+   stock: number;
+}

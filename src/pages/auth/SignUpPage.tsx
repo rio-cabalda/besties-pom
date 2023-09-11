@@ -77,7 +77,7 @@ const SignUpPage = () => {
               className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >First name</label>
               <div className='min-h-[1.5rem] w-full px-2'>
-                {errors.firstname && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.firstname.message}</span>)}
+                {errors.firstname ? ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.firstname.message}</span>):null}
               </div>
             </div>
 {/* Lastname */}
@@ -92,7 +92,7 @@ const SignUpPage = () => {
               className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Last name</label>
               <div className='min-h-[1.5rem] w-full px-2'>
-                {errors.lastname && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.lastname.message}</span>)}
+                {errors.lastname ? (<span className='text-red-500 text-sm transition-all duration-200'>{errors.lastname.message}</span>):null}
               </div>
             </div>
 {/* Birthdate */}
@@ -107,7 +107,7 @@ const SignUpPage = () => {
               className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Birth date</label>
               <div className='min-h-[1.5rem] w-full px-2'>
-                {errors.birthdate && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.birthdate.message}</span>)}
+                {errors.birthdate ? ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.birthdate.message}</span>): null}
               </div>
             </div>
 {/* email */}
@@ -122,7 +122,7 @@ const SignUpPage = () => {
               className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Email</label>
               <div className='min-h-[1.5rem] w-full px-2'>
-                {errors.email && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.email.message}</span>)}
+                {errors.email ? ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.email.message}</span>) : null}
               </div>
             </div>
 {/* Password */}
@@ -145,7 +145,7 @@ const SignUpPage = () => {
               className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Password</label>
               <div className='min-h-[1.5rem] w-full px-2'>
-                {errors.password && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.password.message}</span>)}
+                {errors.password ? ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.password.message}</span>):null}
               </div>
               
             </div>
@@ -168,7 +168,7 @@ const SignUpPage = () => {
               className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Confirm password</label>
               <div className='min-h-[1.5rem] w-full px-2'>
-                {errors.confirmPassword && ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.confirmPassword.message}</span>)}
+                {errors.confirmPassword ? ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.confirmPassword.message}</span>):null}
               </div>
             </div>
 

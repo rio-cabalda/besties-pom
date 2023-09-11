@@ -27,11 +27,6 @@ const Navbar = () => {
                 </h1>
               </Link>
             </div>
-            {/* Pick up/Delivery Option */}
-            {/* <div className='hidden lg:flex items-center bg-gray-200 rounded-full p-1 text-[14px]'>
-                <p className='bg-blue-500 text-white rounded-full p-2'>Delivery</p>
-                <p className='p-2'>Pickup</p>
-            </div> */}
         </div>
 
         {/* search input */}
@@ -71,7 +66,7 @@ const Navbar = () => {
 
         {/* mobile menu */}
         {/* overlay */}
-        {isSidebarOpen && <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'></div>}
+        {isSidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'></div> : null}
 
         {/* side drawer menu */}
          <div className={isSidebarOpen? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-10  duration-300': 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10  duration-300'}>
