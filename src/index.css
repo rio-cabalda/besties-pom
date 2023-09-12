@@ -4,6 +4,9 @@
 
 
 /* Slick Libary CSS */
+html{
+    width: 100vw;
+}
 .slick-arrow {
     display: none !important;
 }

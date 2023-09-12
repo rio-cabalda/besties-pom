@@ -7,8 +7,8 @@ import {MenuItemType} from '../types';
 import logo from '../assets/logo.png';
 
 const Navbar = () => {
-  const [isSidebarOpen, setIsSidbarOpen] = useState<boolean>(false);
-  
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [navLink, setNavLink] = useState<string>('home');
 
   return (
     <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
@@ -16,11 +16,11 @@ const Navbar = () => {
         <div className='flex items-center'>
             
             <div className='flex items-center gap-2 mr-4 mobile-400:mr-0'>
-              <button onClick={()=>setIsSidbarOpen(!isSidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
+              <button onClick={()=>setSidebarOpen(!sidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
                   <AiOutlineMenu size={30} />
               </button>
               <Link to='/' className='flex items-center'>
-                <img src={logo} alt="Logo" className="w-14 h-14 " />
+                <img src={logo} alt="Logo" className="h-14 " />
                 <h1 className='hidden md:block text-2xl transform lg:text-3xl px-2 leading-tight'>
                   Besties
                   <span className='font-bold'> Pom</span>
@@ -42,35 +42,36 @@ const Navbar = () => {
 
             return (
             <li key={id} className='relative mx-1 group'>
-              <Link to={url} className='px-3 transform '>{text}</Link>
-              <div className='absolute -bottom-1 left-1/2 bg-sky-500 rounded-lg origin-center transform -translate-x-1/2  min-h-[2.5px] w-[85%] scale-x-0 transition-all duration-300 group-hover:scale-x-100 '></div>
+              <Link to={url} className='px-3 transform ' onClick={()=>setNavLink(text.toLocaleLowerCase())}>{text}</Link>
+              <div className={`absolute -bottom-1 left-1/2 bg-sky-500 rounded-lg origin-center transform -translate-x-1/2  min-h-[2.5px] w-[85%] scale-x-0 transition-all duration-300 group-hover:scale-x-100 ${navLink === text.toLocaleLowerCase() ? 'scale-x-100':''}`}></div>
             </li>
             )
           })}
-          </ul>
+        </ul>
 
         {/* cart button and log in */}
-        <div className='hidden relative md:flex gap-2'>
-          <a href='/cart' className=' flex justify-center items-center text-lg gap-1 ml-2 mr-4'>
-            <span className='relative text-xl '>
-                  <BsBag />
-                  <span className='absolute top-[7px] left-[1.5px]  text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
-            </span>
-          </a>
+        <div className='hidden md:flex gap-5 items-center'>
+          <div className=''>
+            <Link to='cart' className='relative flex justify-center items-center text-xl'>
+              <BsBag />
+              <span className='absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
+            </Link>
+          </div>
 
-          <button className='transition-all transform font-bold hover:scale-105 duration-300 hover:text-sky-500'>
-            Sign In
-          </button>
+          <div className='transform hover:scale-105 duration-200'>
+            <Link to='signin' className='font-bold hover:text-sky-500'>
+                Sign In
+            </Link>
+          </div>
         </div>
-        
-
+          
         {/* mobile menu */}
         {/* overlay */}
-        {isSidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'></div> : null}
+        {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'></div> : null}
 
         {/* side drawer menu */}
-         <div className={isSidebarOpen? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-10  duration-300': 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10  duration-300'}>
-            <AiOutlineClose size={30} onClick={()=>setIsSidbarOpen(!isSidebarOpen)}  className='absolute right-4 top-4 cursor-pointer hover:text-red-600 transition-colors duration-300'/>
+         <div className={sidebarOpen? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-10  duration-300': 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10  duration-300'}>
+            <AiOutlineClose size={30} onClick={()=>setSidebarOpen(!sidebarOpen)}  className='absolute right-4 top-4 cursor-pointer hover:text-red-600 transition-colors duration-300'/>
             <h2 className='text-2xl p-4'>
               Besties <span className='font-bold'>Pom</span>
             </h2>
@@ -80,7 +81,7 @@ const Navbar = () => {
                     const {id,title, icon, link} = item
                   return (
                     <li key={id} className='flex hover:bg-sky-500 hover:bg-opacity-60'>
-                        <Link key={id} to={link} className='w-full text-xl p-4 flex gap-3 justify-start items-center transform hover:translate-x-2 duration-300 cursor-pointer' onClick={()=>setIsSidbarOpen(!isSidebarOpen)}>
+                        <Link key={id} to={link} className='w-full text-xl p-4 flex gap-3 justify-start items-center transform hover:translate-x-2 duration-300 cursor-pointer' onClick={()=>setSidebarOpen(!sidebarOpen)}>
                             <span className='text-[20px]'>{icon}</span>
                             <span className='text-lg'>{title}</span>
                         </Link> 
