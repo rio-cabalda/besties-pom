@@ -1,5 +1,5 @@
 
-import {MenuItemType,HeadlineItemType} from '../types';
+import {MenuItemType,HeadlineItemType,navLinkType} from '../types';
 import { ImHome } from 'react-icons/im';
 import {FaBoxOpen, FaShoppingCart, FaUserPlus, FaInfoCircle} from 'react-icons/fa';
 
@@ -57,7 +57,7 @@ export const headlineList:HeadlineItemType[] = [
     }, 
 ]
 
-export const navLinks = [
+export const navLinks: navLinkType[] = [
     {
       id: 1,
       text: 'home',

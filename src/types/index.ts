@@ -11,6 +11,12 @@ export type MenuItemType = {
     description: string;
     image: string;
  }
+ 
+ export type navLinkType ={
+   id:number;
+   text: string;
+   url: string;
+}
 
 export type ProductItemType = {
    _id: string;

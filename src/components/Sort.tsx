@@ -22,10 +22,10 @@ const Sort = () => {
 
     
   return (
-    <div className='flex gap-20 justify-center'>
-        <div className='flex gap-4'>
-            <h5>Category:</h5>
-            <select name="category" id="category" className='outline-none border-b-2 border-b-sky-500 capitalize' value={selectedCategory}
+    <div className='w-full py-4 flex md:gap-10 justify-around md:justify-center items-center'>
+        <div className='flex gap-1 md:gap-4'>
+            <h5 className='text-sm'>Category:</h5>
+            <select name="category" id="category" className='text-sm outline-none border-b-2 border-b-sky-500 capitalize' value={selectedCategory}
             onChange={handleCategory}
             >
                 <option value="" disabled hidden>Select option</option>
@@ -41,9 +41,9 @@ const Sort = () => {
                 })} 
             </select>
         </div>
-        <div className='flex gap-4'>
-            <h5>Sort By:</h5>
-            <select name="sort" id="sort" className='outline-none border-b-2 border-b-sky-500 capitalize' value={sort}
+        <div className='flex gap-1 md:gap-4'>
+            <h5 className='text-sm'>Sort By:</h5>
+            <select name="sort" id="sort" className='text-sm outline-none border-b-2 border-b-sky-500 capitalize' value={sort}
             onChange={handleSort}
             >
                 <option value="" disabled hidden>Select option</option>

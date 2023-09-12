@@ -10,7 +10,7 @@ const { showedProducts} = useProductStore();
 
 
   return (
-    <section className='grid grid-cols-2 text-xs gap-2 md:grid-cols-3 lg:grid-cols-4  p-1 lg:p-4 lg:gap-7 w-full '>
+    <section className='grid grid-cols-2 text-xs p-1 gap-2 md:grid-cols-3 md:gap-5 md:p-4 lg:grid-cols-4 lg:gap-3 w-full bg-red-500'>
         {showedProducts.map((item:ProductItemType)=>{
             const {_id:id, image, name, price, rating} = item;
             return (
