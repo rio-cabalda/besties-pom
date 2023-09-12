@@ -12,7 +12,7 @@ export type MenuItemType = {
     image: string;
  }
 
-export type TProductItem = {
+export type ProductItemType = {
    _id: string;
    category: string;
    description: string;
@@ -21,4 +21,21 @@ export type TProductItem = {
    price: number;
    rating: number;
    stock: number;
+}
+export enum SortOption {
+   PriceLowest = 'price-lowest',
+   PriceHighest = 'price-highest',
+   NameA_Z = 'name-a',
+   NameZ_A = 'name-z',
+ }
+
+ export type ProductStoreType = {
+   products: ProductItemType[]; 
+   showedProducts: ProductItemType[];
+   category: string[];
+   gridView: boolean;
+   changeView: () => void;
+   setProducts: (products: ProductItemType[]) => void; 
+   sortProducts: (sortValue:string) =>void;
+   sortByCategory: (category:string) =>void;
 }

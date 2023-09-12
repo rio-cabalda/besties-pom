@@ -1,34 +1,68 @@
-import {TProductItem} from '../types';
-import create from 'zustand';
+import { SortOption, ProductStoreType} from '../types';
+import { create } from 'zustand';
 
-type DataStoreState = {
-  products: TProductItem[]; 
-  showedProducts: TProductItem[];
-  setProducts: (products: TProductItem[]) => void; 
-  filterByA_Z: () => void; // Function to filter products from A to Z
-  filterByZ_A: () => void; // New function to filter products from Z to A
+export const useProductStore = create<ProductStoreType>((set) => ({
+  products: [],
+  showedProducts: [],
+  category: [],
+  gridView: true,
+  changeView: () => {
+    set((state) => ({
+      gridView: !state.gridView, // Toggle the value of gridView
+    }));
+  },
+  setProducts: (products) => {
+    // Check if products has a value and initialize filteredProducts accordingly
+    const showedProducts = products ? [...products] : [];
+    if(showedProducts.length > 0){
+    const uniqueCategoriesSet = new Set(showedProducts.map((product) => product.category.toLocaleLowerCase()));
+    const uniqueCategoriesArray = ['all',...uniqueCategoriesSet];
+    set({ products, showedProducts,category:uniqueCategoriesArray});
+    }
+    
+  },
+  sortProducts: (sortValue)=>{
+    switch (sortValue) {
+      case SortOption.PriceLowest:
+        set((state) => ({
+          showedProducts: [...state.showedProducts].sort(
+            (a, b) => a.price - b.price
+          ),
+        }));
+        return;
+      case SortOption.PriceHighest:
+        set((state) => ({
+          showedProducts: [...state.showedProducts].sort(
+            (a, b) => b.price - a.price
+          ),
+        }));
+        return;
+      case SortOption.NameA_Z:
+        set((state) => ({
+          showedProducts: [...state.showedProducts].sort((a, b) =>
+            a.name.localeCompare(b.name)
+          ),
+        }));
+        return;
+      case SortOption.NameZ_A:
+        set((state) => ({
+          showedProducts: [...state.showedProducts].sort((a, b) =>
+            b.name.localeCompare(a.name) // Sort in reverse order for Z to A
+          ),
+        }));
+        return; 
+    }
+  },
+  sortByCategory: (categoryValue)=>{
+    if(categoryValue.toLocaleLowerCase() ==='all'){
+      set((state)=>({showedProducts: [...state.products]}))
+      
+    }else{
+      set((state) => ({
+        showedProducts: state.products.filter((product) =>
+          product.category.toLowerCase() === categoryValue.toLowerCase()
+        ),
+      }));
+    }
   }
-
-  export const useProductStore = create<DataStoreState>((set) => ({
-    products: [],
-    showedProducts: [],
-    setProducts: (products) => {
-      // Check if products has a value and initialize filteredProducts accordingly
-      const showedProducts = products ? [...products] : [];
-      set({ products, showedProducts });
-    },
-    filterByA_Z: () => {
-      set((state) => ({
-        showedProducts: [...state.products].sort((a, b) =>
-          a.name.localeCompare(b.name)
-        ),
-      }));
-    },
-    filterByZ_A: () => {
-      set((state) => ({
-        showedProducts: [...state.products].sort((a, b) =>
-          b.name.localeCompare(a.name) // Sort in reverse order for Z to A
-        ),
-      }));
-    },
-  }));
+}));

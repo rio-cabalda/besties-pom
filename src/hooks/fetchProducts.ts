@@ -10,14 +10,15 @@ const fetchData = async () => {
 };
 
 // Create a custom hook to fetch the data using React Query
-export function useFetchData() {
+export const useFetchData = () => {
   const { setProducts } = useProductStore(); // Use the Zustand store
 
   const { data, isLoading, isError } = useQuery('product', fetchData);
 
-  // Update the Zustand store with the fetched data
+  //Update the Zustand store with the fetched data
   useEffect(()=>{
     setProducts(data)
+    // eslint-disable-next-line
   },[data])
 
   return { data, isLoading, isError };
