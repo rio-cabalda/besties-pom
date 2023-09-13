@@ -40,6 +40,8 @@ export enum SortOption {
    showedProducts: ProductItemType[];
    category: string[];
    gridView: boolean;
+   navHeight: string;
+   setNavHeight: (height: string) => void;
    changeView: () => void;
    setProducts: (products: ProductItemType[]) => void; 
    sortProducts: (sortValue:string) =>void;

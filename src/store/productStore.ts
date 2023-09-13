@@ -1,10 +1,14 @@
 import { SortOption, ProductStoreType} from '../types';
 import { create } from 'zustand';
 
+
+
 export const useProductStore = create<ProductStoreType>((set) => ({
   products: [],
   showedProducts: [],
   category: [],
+  navHeight: '',
+  setNavHeight: (height)=>{( set({navHeight:height}))},
   gridView: true,
   changeView: () => {
     set((state) => ({
@@ -12,6 +16,7 @@ export const useProductStore = create<ProductStoreType>((set) => ({
     }));
   },
   setProducts: (products) => {
+     
     // Check if products has a value and initialize filteredProducts accordingly
     const showedProducts = products ? [...products] : [];
     if(showedProducts.length > 0){

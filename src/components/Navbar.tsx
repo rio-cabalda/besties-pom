@@ -1,35 +1,39 @@
-import {useState} from 'react';
-import {AiOutlineClose, AiOutlineMenu, AiOutlineSearch} from 'react-icons/ai';
+import {useState, useRef, useEffect} from 'react';
+import { AiOutlineMenu, AiOutlineSearch} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { BsBag } from 'react-icons/bs';
-import { sidebarLinks, navLinks } from '../utils/constant';
-import {MenuItemType} from '../types';
+import { navLinks } from '../utils/constant';
 import logo from '../assets/logo.png';
+import Sidebar from './Sidebar';
+import { useProductStore } from '../store/productStore';
+
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [navLink, setNavLink] = useState<string>('home');
-
-  const handleSidebar = (name) =>{
-    setSidebarOpen(!sidebarOpen);
-    setNavLink(name)
-  }
-
+  const navRef = useRef<HTMLHeadingElement | null>(null);
+  const { setNavHeight } = useProductStore();
+  
+  useEffect(() => {
+    if (navRef.current) {
+      const height = navRef.current.clientHeight;
+      setNavHeight(height.toLocaleString());
+    }
+    // eslint-disable-next-line
+  }, [navRef]);
 
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
-    <nav className='bg-red-500 w-full fixed top-0 left-0 z-30'>
-      <div className='max-w-screen-xl mx-auto p-4 flex justify-between items-center xl:px-0'>
+    <header ref={navRef} className='w-full bg-slate-300 fixed top-0 left-0 z-30'>
+      <nav className='max-w-screen-xl mx-auto p-4 flex justify-between items-center xl:px-0'>
         {/* left side */}
-   
-            
-          <div className='flex items-center gap-2 mr-4 mobile-400:mr-0'>
+          <div className='flex items-center gap-2 mr-4'>
             <button onClick={()=>setSidebarOpen(!sidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
                 <AiOutlineMenu size={30} />
             </button>
             <Link to='/' className='flex items-center'>
               <img src={logo} alt="Logo" className="h-14 " />
-              <h1 className='hidden md:block text-2xl transform lg:text-3xl px-2 leading-tight'>
+              <h1 className='hidden sm:block text-2xl transform lg:text-3xl px-2 leading-tight'>
                 Besties
                 <span className='font-bold'> Pom</span>
               </h1>
@@ -38,13 +42,13 @@ const Navbar = () => {
      
 
         {/* search input */}
-        <div className='bg-gray-200 px-2 md:mx-6 rounded-full flex items-center  flex-1  max-w-lg '>
+        <div className='bg-gray-200 px-2 md:ml-6 rounded-full flex items-center  flex-1  max-w-lg '>
           <AiOutlineSearch size={25} />
           <input className='bg-transparent p-2 w-full focus:outline-none' type="text" name="search" id="search" placeholder='search product' />
         </div>
 
         {/* Links */}
-        <ul className='hidden md:flex capitalize justify-center items-center'>
+        <ul className='hidden md:flex md:px-6 capitalize justify-center items-center'>
           {navLinks.map((link)=>{
             const {id, text, url}= link;
 
@@ -77,30 +81,11 @@ const Navbar = () => {
         {/* overlay */}
         {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-40 top-0 left-0'></div> : null}
 
-        {/* side drawer menu */}
-         <div className={sidebarOpen? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-40  duration-300': 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-40  duration-300'}>
-            <AiOutlineClose size={30} onClick={()=>setSidebarOpen(!sidebarOpen)}  className='absolute right-4 top-4 cursor-pointer hover:text-red-600 transition-colors duration-300'/>
-            <h2 className='text-2xl p-4'>
-              Besties <span className='font-bold'>Pom</span>
-            </h2>
-            <nav>
-              <ul className='flex flex-col py-4 text-grey-800'>
-                {sidebarLinks.map((item:MenuItemType)=>{
-                    const {id,title, icon, link} = item
-                  return (
-                    <li key={id} className={`${navLink === title.toLocaleLowerCase() ? 'bg-sky-500 bg-opacity-60': 'hover:bg-sky-500 hover:bg-opacity-60'}`}>
-                        <Link key={id} to={link}  onClick={()=>handleSidebar(title.toLocaleLowerCase())} className={`w-full text-xl p-4 flex gap-3 justify-start items-center transform duration-300 cursor-pointer ${navLink === title.toLocaleLowerCase() ? 'translate-x-2' : 'hover:translate-x-2'}`}>
-                            <span className='text-[20px]'>{icon}</span>
-                            <span className='text-lg'>{title}</span>
-                        </Link> 
-                    </li>)
-                })}
-              </ul>
-            </nav>
-          </div>
+        {/* Sidebar menu */}
+         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} navLink={navLink} setNavLink={setNavLink}/>
 
-        </div>
-    </nav>
+        </nav>
+    </header>
   )
 }
 

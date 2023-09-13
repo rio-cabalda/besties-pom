@@ -1,4 +1,4 @@
-import { useFetchData } from '../hooks/fetchProducts';
+import { useFetchData } from '../hooks';
 import errorImage from '../assets/sad_dog.png'
 import ProductList from '../components/ProductList';
 import Sort from '../components/Sort';
@@ -8,13 +8,14 @@ const ProductsPage = () => {
 
  if(isLoading){
     return (
-        <main className='max-w-screen-xl mx-auto flex flex-col justify-between items-center '>
+        <section className='max-w-screen-xl mx-auto flex flex-col justify-between items-center'>
             <div className="w-16 h-16 mt-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-        </main>)
+        </section>)
  }
 if(isError){
     return (
-        <main className='w-full flex flex-col justify-center items-center gap-10'>
+        
+        <section className='w-full flex flex-col justify-center items-center gap-10'>
             <div className="flex-1 w-full bg-red-100 text-red-600 border border-red-400 rounded p-4 flex flex-col justify-center items-center">
                 <h2 className="font-semibold text-lg mb-2">Something Went Wrong</h2>
                 <p className="text-sm">Sorry, we encountered an error while loading the data.</p>
@@ -23,19 +24,19 @@ if(isError){
                 <img className='w-full object-cover' src={errorImage} alt="Dog" />
             </div>
             
-        </main>
+        </section>
     )
    
 }
  
   return (
-    <main className='max-w-screen-xl mx-auto flex flex-col justify-between items-center '>
+    <section className='max-w-screen-xl mx-auto flex flex-col justify-between items-center'>
     {/* Sort */}
     <Sort />
     {/* Products View*/}
     <ProductList />
    
-  </main>
+  </section>
   )
 }
 

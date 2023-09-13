@@ -19,7 +19,7 @@ const Hero = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    pauseOnHover: true, //will pause when the container is hover
+    pauseOnHover: false, //will pause when the container is hover
   };
 
   const handlePrevious = () => {

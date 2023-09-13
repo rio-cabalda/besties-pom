@@ -22,10 +22,10 @@ const Sort = () => {
 
     
   return (
-    <div className='w-full py-4 flex md:gap-10 justify-around md:justify-center items-center'>
-        <div className='flex gap-1 md:gap-4'>
-            <h5 className='text-sm'>Category:</h5>
-            <select name="category" id="category" className='text-sm outline-none border-b-2 border-b-sky-500 capitalize' value={selectedCategory}
+    <section className='w-full py-4 flex md:gap-10 justify-around md:justify-center items-center'>
+        <div className='flex gap-1 md:gap-4 items-center'>
+            <h5 className='text-xs md:text-sm'>Category:</h5>
+            <select name="category" id="category" className='text-xs md:text-sm w-fit outline-none p-1 border-b-2 border-b-sky-500 capitalize' value={selectedCategory}
             onChange={handleCategory}
             >
                 <option value="" disabled hidden>Select option</option>
@@ -41,9 +41,9 @@ const Sort = () => {
                 })} 
             </select>
         </div>
-        <div className='flex gap-1 md:gap-4'>
-            <h5 className='text-sm'>Sort By:</h5>
-            <select name="sort" id="sort" className='text-sm outline-none border-b-2 border-b-sky-500 capitalize' value={sort}
+        <div className='flex gap-1 md:gap-4 items-center'>
+            <h5 className='text-xs md:text-sm'>Sort By:</h5>
+            <select name="sort" id="sort" className='text-xs md:text-sm p-1 outline-none border-b-2 border-b-sky-500 capitalize' value={sort}
             onChange={handleSort}
             >
                 <option value="" disabled hidden>Select option</option>
@@ -53,7 +53,7 @@ const Sort = () => {
                 <option className='disabled:bg-sky-300 disabled:text-gray-700' disabled={sort === SortOption.NameZ_A} value={SortOption.NameZ_A}>name (z-a)</option>
             </select>
         </div>
-    </div>
+    </section>
   )
 }
 

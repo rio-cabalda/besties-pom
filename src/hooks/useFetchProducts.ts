@@ -10,7 +10,7 @@ const fetchData = async () => {
 };
 
 // Create a custom hook to fetch the data using React Query
-export const useFetchData = () => {
+const useFetchData = () => {
   const { setProducts } = useProductStore(); // Use the Zustand store
 
   const { data, isLoading, isError } = useQuery('product', fetchData);
@@ -23,3 +23,5 @@ export const useFetchData = () => {
 
   return { data, isLoading, isError };
 }
+
+export default useFetchData;

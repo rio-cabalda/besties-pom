@@ -53,7 +53,7 @@ const SignUpPage = () => {
 
   
   return (
-    <main className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex '>
+    <section className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex '>
 
       <div className='flex mx-auto max-w-[1640px] h-fit rounded-lg shadow-md'>  
 
@@ -182,7 +182,7 @@ const SignUpPage = () => {
             
         </div>
       </div>
-   </main>
+   </section>
   )
 }
 

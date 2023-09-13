@@ -21,7 +21,7 @@ const CustomerRating = ({ rating }: TCustomerRatingProps) => {
 
 
   return (
-        <div className="text-[10] lg:text-xs flex gap-1 text-yellow-500">
+        <div className="lg:text-xs flex gap-1 text-yellow-500">
             {tempStars}
         </div>
   )

@@ -1,8 +1,9 @@
-import React from 'react'
 
 const SingleProduct = () => {
+
+
   return (
-    <div>SingleProduct</div>
+    <section >SingleProduct</section>
   )
 }
 

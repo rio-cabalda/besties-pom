@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePasswordToggle } from '../../hooks';
 import { SiDatadog } from 'react-icons/si';
 import { BiSolidHide, BiShow } from 'react-icons/bi';
@@ -10,7 +9,7 @@ const SignInPage = () => {
  
 
   return (
-    <main className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>
+    <section className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>
 
       <div className='flex mx-auto max-w-[1640px] h-fit rounded-lg shadow-md'>  
 
@@ -83,7 +82,7 @@ const SignInPage = () => {
         </div>
       </div>
 
-    </main>
+    </section>
   )
 }
 
