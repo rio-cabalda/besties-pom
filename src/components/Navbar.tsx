@@ -1,26 +1,31 @@
 import {useState, useRef, useEffect} from 'react';
 import { AiOutlineMenu, AiOutlineSearch} from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { BsBag } from 'react-icons/bs';
 import { navLinks } from '../utils/constant';
 import logo from '../assets/logo.png';
 import Sidebar from './Sidebar';
 import { useProductStore } from '../store/productStore';
+import useCurrentPath from '../hooks/useCurrentPath';
 
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-  const [navLink, setNavLink] = useState<string>('home');
+  const [navLink, setNavLink] = useState<string>('');
   const navRef = useRef<HTMLHeadingElement | null>(null);
   const { setNavHeight } = useProductStore();
-  
+  const {pathname} = useLocation();
+  const path = useCurrentPath(pathname.toString());
+
   useEffect(() => {
+    
     if (navRef.current) {
       const height = navRef.current.clientHeight;
       setNavHeight(height.toLocaleString());
     }
+    setNavLink(path);
     // eslint-disable-next-line
-  }, [navRef]);
+  }, [navRef, pathname]);
 
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
@@ -54,7 +59,7 @@ const Navbar = () => {
 
             return (
             <li key={id} className='relative mx-1 group'>
-              <Link to={url} className='px-3 transform ' onClick={()=>setNavLink(text.toLocaleLowerCase())}>{text}</Link>
+              <Link to={url} className='px-3 transform '>{text}</Link>
               <div className={`absolute -bottom-1 left-1/2 bg-sky-500 rounded-lg origin-center transform -translate-x-1/2  min-h-[2.5px] w-[85%] scale-x-0 transition-all duration-300 group-hover:scale-x-100 ${navLink === text.toLocaleLowerCase() ? 'scale-x-100':''}`}></div>
             </li>
             )
@@ -82,7 +87,7 @@ const Navbar = () => {
         {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-40 top-0 left-0'></div> : null}
 
         {/* Sidebar menu */}
-         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} navLink={navLink} setNavLink={setNavLink}/>
+         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} navLink={navLink} />
 
         </nav>
     </header>
