@@ -58,8 +58,8 @@ const Navbar = () => {
             const {id, text, url}= link;
 
             return (
-              <li key={id} className={`relative mx-1 group duration-200 ${navLink === text.toLocaleLowerCase() ? '':'hover:translate-y-1'}`}>
-                <Link to={url} className='px-3 transform '>{text}</Link>
+              <li key={id} className={` relative mx-1 group duration-200 ${navLink === text.toLocaleLowerCase() ? '':'hover:translate-y-1'}`}>
+                <Link to={url} className='px-3 py-1 transform'>{text}</Link>
                 <div className={`absolute -bottom-1 left-1/2 bg-sky-500 rounded-lg origin-center transform -translate-x-1/2  min-h-[2.5px] w-[85%] scale-x-0 transition-all duration-300 group-hover:scale-x-100 ${navLink === text.toLocaleLowerCase() ? 'scale-x-100':''}`}></div>
               </li>
             )
