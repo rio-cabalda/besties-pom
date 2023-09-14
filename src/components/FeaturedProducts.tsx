@@ -1,8 +1,8 @@
+import { Link } from "react-router-dom";
 import { Product } from ".";
 import { useFetchData } from "../hooks";
 import { useProductStore } from "../store/productStore"
 import { ProductItemType } from "../types";
-
 
 const FeaturedProducts = () => {
   const {isLoading, isError} = useFetchData();
@@ -49,6 +49,8 @@ const FeaturedProducts = () => {
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 p-4">
             {featuredProducts.map((item:ProductItemType)=>(<Product key={item._id} item={item}/>))}
           </div>
+
+          <Link to='products' className='rounded-sm py-2 px-8 mt-10 bg-sky-500 text-white hover:bg-sky-600 hover:text-slate-100 duration-300'>All Products</Link>
         </article>
       </section>
   )
