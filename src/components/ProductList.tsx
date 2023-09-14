@@ -1,6 +1,6 @@
 import { ProductItemType } from '../types';
 import { useProductStore } from '../store/productStore';
-import Product from './Product';
+import {Product} from '.';
 
 const ProductList = () => {
   const { showedProducts} = useProductStore();
