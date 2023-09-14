@@ -1,14 +1,15 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import {MdOutlineArrowBackIos,MdOutlineArrowForwardIos} from 'react-icons/md';
-import { longList } from '../utils/carouselData';
+import { heroCarousel } from '../utils/carouselData';
+import { Link } from 'react-router-dom';
 
 
 
 const Hero = () => {
-  const [heroCarousel] = useState(longList);
+  const [carousel] = useState(heroCarousel);
   const sliderRef = useRef<Slider | null>(null);
 
   const settings = {
@@ -36,23 +37,35 @@ const Hero = () => {
 
   return (
     <section className='w-full relative'>
-
         {/* PREVIOUOS BUTTON */}
-        <button className='absolute left-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-6xl' onClick={handlePrevious}><MdOutlineArrowBackIos /></button>
-        {/* NEXT BUTTON */}
-        <button className='absolute right-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-6xl' onClick={handleNext}><MdOutlineArrowForwardIos /></button>
+        <div className='hidden md:block'>
+          <button className='absolute left-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-6xl' onClick={handlePrevious}><MdOutlineArrowBackIos /></button>
+          {/* NEXT BUTTON */}
+          <button className='absolute right-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-6xl' onClick={handleNext}><MdOutlineArrowForwardIos /></button>
+        </div>
 
-      <Slider ref={sliderRef} {...settings}>
-        {heroCarousel.map((slide)=>{
-            const {id, image} = slide;
+      <div>
+        <Slider ref={sliderRef} {...settings}>
+          {carousel.map((slide)=>{
+              const {id, image} = slide;
 
-            return (
-            <article key={id} className='w-full h-[80vh] bg-blue-700'>
-                <img className='w-full h-full object-cover' src={image} alt='image' />
-            </article>
-            )
-          })}
-        </Slider>
+              return (
+              <article key={id} className='w-full h-[60vh] md:h-[80vh]'>
+                  <img className='w-full h-full object-cover' src={image} alt='image' />
+              </article>
+              )
+            })}
+          </Slider>
+      </div>
+     
+
+        {/* Hero Section Content */}
+        <article className='absolute top-0 left-0 w-full h-full p-4 md:px-20  bg-gradient-to-r from-white to-transparent flex flex-col justify-center items-start'>
+          <h1 className='mb-5 font-bold leading-tight text-slate-700 text-3xl md:leading-tight md:text-5xl lg:text-6xl lg:leading-tight '>Discover a World of <br/><span className='text-blue-700 '>Tail-Wagging Happiness!</span></h1>
+          <p className='max-w-3xl text-slate-700 md:text-lg lg:text-xl mb-8'>Browse our extensive collection and find the perfect products that will keep those tails wagging.</p>
+          <Link to='products' className='rounded-sm py-2 px-4 bg-sky-500 text-white hover:bg-sky-600 hover:text-slate-100 duration-300'>Shop Now</Link>
+          
+        </article>
     </section>
   )
 }

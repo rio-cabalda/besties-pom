@@ -8,9 +8,11 @@
     display: none !important;
 }
 .slick-dots {
+    display:none !important;
     position: absolute;
     bottom: 0;
     padding-bottom: 1rem;
+    z-index: 10;
 }
 
 .slick-dots li button:before {
