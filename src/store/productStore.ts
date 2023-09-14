@@ -1,3 +1,4 @@
+import { randomFeatured } from '../hooks';
 import { SortOption, ProductStoreType} from '../types';
 import { create } from 'zustand';
 
@@ -7,7 +8,8 @@ export const useProductStore = create<ProductStoreType>((set) => ({
   products: [],
   showedProducts: [],
   category: [],
-  navHeight: '',
+  featuredProducts: [],
+  navHeight: 0,
   setNavHeight: (height)=>{( set({navHeight:height}))},
   gridView: true,
   changeView: () => {
@@ -22,7 +24,7 @@ export const useProductStore = create<ProductStoreType>((set) => ({
     if(showedProducts.length > 0){
     const uniqueCategoriesSet = new Set(showedProducts.map((product) => product.category.toLocaleLowerCase()));
     const uniqueCategoriesArray = ['all',...uniqueCategoriesSet];
-    set({ products, showedProducts,category:uniqueCategoriesArray});
+    set({ products, showedProducts,category:uniqueCategoriesArray, featuredProducts:randomFeatured(products, 4) });
     }
     
   },

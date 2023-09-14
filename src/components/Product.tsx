@@ -1,8 +1,8 @@
 import React from 'react';
-import { formatPrice } from '../utils/helpers';
+import {useFormatPrice}  from '../hooks';
 import {BiSearchAlt} from 'react-icons/bi'
 import { Link } from 'react-router-dom';
-import CustomerRating from '../components/CustomerRating';
+import {CustomerRating} from '../components';
 import { ProductItemType } from '../types';
 
 interface ProductProps {
@@ -29,7 +29,7 @@ const Product:React.FC<ProductProps> = ({item}) => {
       <footer className='p-4 flex flex-col gap-2  text-xs lg:text-base'>
           <div className='flex flex-col gap-1 justify-start md:flex-row md:justify-between'>
               <h5 className='font-semibold text-xs lg:text-sm'>{name}</h5>
-              <p className='md:ml-5 text-xs lg:text-sm'>{formatPrice(price)}</p>
+              <p className='md:ml-5 text-xs lg:text-sm'>{useFormatPrice(price)}</p>
           </div>
           <div className='h-full text-[10px] flex flex-col items-start gap-1  md:flex-row md:items-center'>
               <CustomerRating rating={rating} />

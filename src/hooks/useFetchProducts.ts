@@ -5,7 +5,7 @@ import { useProductStore } from '../store/productStore';
 
 // Define the function to fetch data from your API
 const fetchData = async () => {
-  const response = await axios.get('http://localhost:8080/products');
+  const response = await axios.get('http://192.168.1.31:8080/products');
   return response.data.products;
 };
 
