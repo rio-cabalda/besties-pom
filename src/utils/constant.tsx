@@ -36,6 +36,24 @@ export const sidebarLinks:MenuItemType[] = [
     },
 ]
 
+export const navLinks: navLinkType[] = [
+    {
+      id: 1,
+      text: 'home',
+      url: '/',
+    },
+    {
+      id: 2,
+      text: 'about',
+      url: '/about',
+    },
+    {
+      id: 3,
+      text: 'products',
+      url: '/products',
+    },
+  ]
+
 export const headlineList:HeadlineItemType[] = [
     {
         id: 1,
@@ -57,20 +75,3 @@ export const headlineList:HeadlineItemType[] = [
     }, 
 ]
 
-export const navLinks: navLinkType[] = [
-    {
-      id: 1,
-      text: 'home',
-      url: '/',
-    },
-    {
-      id: 2,
-      text: 'about',
-      url: '/about',
-    },
-    {
-      id: 3,
-      text: 'products',
-      url: '/products',
-    },
-  ]

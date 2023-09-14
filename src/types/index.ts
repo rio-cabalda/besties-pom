@@ -38,10 +38,11 @@ export enum SortOption {
  export type ProductStoreType = {
    products: ProductItemType[]; 
    showedProducts: ProductItemType[];
+   featuredProducts: ProductItemType[];
    category: string[];
    gridView: boolean;
-   navHeight: string;
-   setNavHeight: (height: string) => void;
+   navHeight: number;
+   setNavHeight: (height: number) => void;
    changeView: () => void;
    setProducts: (products: ProductItemType[]) => void; 
    sortProducts: (sortValue:string) =>void;
