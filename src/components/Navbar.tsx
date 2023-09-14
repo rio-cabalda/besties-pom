@@ -47,7 +47,7 @@ const Navbar = () => {
      
 
         {/* search input */}
-        <div className='bg-gray-200 px-2 md:mx-6 rounded-full flex items-center flex-1  max-w-lg '>
+        <div className='bg-gray-200 px-2 ml-4 md:mx-6 rounded-full flex items-center flex-1  max-w-lg '>
           <AiOutlineSearch size={25} />
           <input className='bg-transparent p-2 w-full focus:outline-none' type="text" name="search" id="search" placeholder='search product' />
         </div>
