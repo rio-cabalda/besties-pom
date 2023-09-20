@@ -3,7 +3,7 @@ import { BiSolidHide, BiShow } from 'react-icons/bi';
 import {usePasswordToggle, useConfirmPasswordToggle} from '../../hooks';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signupSchema, TSignUpSchema } from '../../types/SignUpTypes';
+import { signUpSchema, TSignUpSchema } from '../../types/SignUpTypes';
 import axios from 'axios';
 import toast  from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,7 @@ const SignUpPage = () => {
     formState: {errors,isSubmitting},
     reset,
   } = useForm<TSignUpSchema>({
-    resolver: zodResolver(signupSchema)
+    resolver: zodResolver(signUpSchema)
   });
   const navigate = useNavigate();
 
@@ -35,10 +35,6 @@ const SignUpPage = () => {
         'Content-Type': 'application/json',
       },
     });
-    
-    // const responseData = response.data as UserType;
-    // console.log('Response type:', typeof response);
-    // console.log('Response data:', response.status);
 
     if (response.status === 201) {
       // Success: HTTP status code 200
@@ -130,7 +126,7 @@ const SignUpPage = () => {
               <input 
               {...register('password')}
               id='password'
-              className=' w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
+              className='w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={inputType}
               placeholder=' '/>
 
