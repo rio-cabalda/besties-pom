@@ -70,7 +70,7 @@ const SignUpPage = () => {
               <input 
               {...register('firstname')}
               id='firstname'
-              className='w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
+              className='w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="firstname"
@@ -85,7 +85,7 @@ const SignUpPage = () => {
               <input 
               {...register('lastname')}
               id='lastname'
-              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
+              className=' w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="lastname"
@@ -100,7 +100,7 @@ const SignUpPage = () => {
               <input 
               {...register('birthdate')}
               id='date'
-              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
+              className=' w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={"text"} 
               placeholder=' '/>
               <label htmlFor="date"
@@ -115,7 +115,7 @@ const SignUpPage = () => {
               <input 
               {...register('email')}
               id='email'
-              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
+              className=' w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type='email' 
               placeholder=' '/>
               <label htmlFor="email"
@@ -130,7 +130,7 @@ const SignUpPage = () => {
               <input 
               {...register('password')}
               id='password'
-              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
+              className=' w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={inputType}
               placeholder=' '/>
 
@@ -154,7 +154,7 @@ const SignUpPage = () => {
               <input 
               {...register('confirmPassword')}
               id='confirmPassword'
-              className=' w-full px-2 py-1 border-1 border-transparent border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
+              className=' w-full px-2 py-1 border-1 border-transparent bg-transparent  border-b-2 border-b-sky-200 peer focus:rounded-md focus:border-solid focus:border focus:ring-0 focus:border-sky-500 outline-none text-base'
               type={confirmInputType}
               placeholder=' '/>
               <button
