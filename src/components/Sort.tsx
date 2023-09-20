@@ -34,7 +34,6 @@ const Sort = () => {
                         <option key={item} 
                         disabled={selectedCategory === item} 
                         value={item}
-                        className='disabled:bg-sky-300 disabled:text-gray-700'
                         >{item}</option>
                     )
                     

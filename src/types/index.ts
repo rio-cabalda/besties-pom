@@ -4,13 +4,6 @@ export type MenuItemType = {
     icon: React.ReactNode;
     link: string;
  }
-
- export type HeadlineItemType = {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
- }
  
  export type navLinkType ={
    id:number;
@@ -40,10 +33,10 @@ export enum SortOption {
    showedProducts: ProductItemType[];
    featuredProducts: ProductItemType[];
    category: string[];
-   gridView: boolean;
    navHeight: number;
+   searchValue: string;
+   setSearch: (value:string) => void;
    setNavHeight: (height: number) => void;
-   changeView: () => void;
    setProducts: (products: ProductItemType[]) => void; 
    sortProducts: (sortValue:string) =>void;
    sortByCategory: (category:string) =>void;

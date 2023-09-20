@@ -3,7 +3,7 @@ const SingleProduct = () => {
 
 
   return (
-    <section >SingleProduct</section>
+    <section className="h-screen">SingleProduct</section>
   )
 }
 

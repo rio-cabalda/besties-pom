@@ -1,5 +1,5 @@
 import {SignUp, SignIn} from "./pages/auth";
-import {Navbar} from "./components";
+import {Navbar,Footer} from "./components";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home,Products, Error, SingleProduct } from "./pages";
 import { useProductStore } from "./store/productStore";
@@ -7,10 +7,14 @@ import { useProductStore } from "./store/productStore";
 
 function App() {
   const {navHeight} = useProductStore(); //height of nav(fixed position) use to margin top
+  const divStyle = {
+    marginTop: `${navHeight}px`
+  };
+  
   return (
     <BrowserRouter>
       <Navbar/>
-        <main style={{marginTop: `${navHeight}px`}}>
+        <main style={divStyle}>
           <Routes>
             <Route path="/" element={<Home />}/>
             <Route path='signup' element={<SignUp/>} />
@@ -20,12 +24,7 @@ function App() {
             <Route path='*' element={<Error />} />
           </Routes>
         </main>
-     
-      
-   
-      {/* </Footer> */}
-
-
+      <Footer />
     </BrowserRouter>
   )
 }

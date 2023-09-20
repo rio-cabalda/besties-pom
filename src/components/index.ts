@@ -7,10 +7,16 @@ import Product from "./Product";
 import ProductList from "./ProductList";
 import Sidebar from "./Sidebar";
 import Sort from "./Sort";
+import Services from "./Services";
+import SectionTitle from "./SectionTitle";
+import Footer from "./Footer";
+import SearchBar from "./SearchBar";
+SearchBar
 
 export { CustomerRating,ErrorMessage,FeaturedProducts,Hero,Navbar,Product,
     ProductList,
     Sidebar,
-    Sort }
+    Sort,
+    Services,SectionTitle,Footer,SearchBar }
 
 

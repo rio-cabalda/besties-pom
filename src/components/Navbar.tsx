@@ -1,10 +1,10 @@
 import {useState, useRef, useEffect} from 'react';
-import { AiOutlineMenu, AiOutlineSearch} from 'react-icons/ai';
+import { AiOutlineMenu} from 'react-icons/ai';
 import { Link, useLocation } from 'react-router-dom';
 import { BsBag } from 'react-icons/bs';
 import { navLinks } from '../utils/constant';
-import logo from '../assets/logo.png';
-import {Sidebar} from '.';
+import logo from '../assets/logo-192px.png';
+import {SearchBar, Sidebar} from '.';
 import { useProductStore } from '../store/productStore';
 import useCurrentPath from '../hooks/useCurrentPath';
 
@@ -33,8 +33,8 @@ const Navbar = () => {
       <nav className='max-w-screen-xl mx-auto py-2 px-4 flex justify-between items-center xl:px-0'>
         {/* left side */}
           <div className='flex items-center gap-2'>
-            <button onClick={()=>setSidebarOpen(!sidebarOpen)} className='cursor-pointer mr-2 transition-transform transform-gpu transform-origin-center hover:animate-pulsing'>
-                <AiOutlineMenu size={30} />
+            <button onClick={()=>setSidebarOpen(!sidebarOpen)} className='cursor-pointer mr-2'>
+                <AiOutlineMenu size={30}/>
             </button>
             <Link to='/' className='flex items-center justify-center'>
               <img src={logo} alt="Logo" className="h-16 w-16" />
@@ -47,9 +47,8 @@ const Navbar = () => {
      
 
         {/* search input */}
-        <div className='bg-gray-200 px-2 ml-4 md:mx-6 rounded-full flex items-center flex-1  max-w-lg '>
-          <AiOutlineSearch size={25} />
-          <input className='bg-transparent p-2 w-full focus:outline-none' type="text" name="search" id="search" placeholder='search product' />
+        <div className='bg-gray-200 px-2 ml-4 flex items-center flex-1 md:mx-6 rounded-full max-w-lg'>
+          <SearchBar />
         </div>
 
         {/* Links */}
@@ -84,7 +83,7 @@ const Navbar = () => {
           
         {/* mobile menu */}
         {/* overlay */}
-        {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-40 top-0 left-0'></div> : null}
+        {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-40 top-0 left-0' onClick={()=>setSidebarOpen(!sidebarOpen)}></div> : null}
 
         {/* Sidebar menu */}
          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} navLink={navLink} />

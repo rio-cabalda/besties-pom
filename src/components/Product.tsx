@@ -16,7 +16,7 @@ const Product:React.FC<ProductProps> = ({item}) => {
   return (
     <div key={id} className='bg-sky-100 rounded-lg shadow-md overflow-hidden'>
       <div className='relative group bg-white'>
-          <div className='h-52 md:h-64 lg:h-72'>
+          <div className='h-64 g:h-72'>
               <img className='w-full h-full object-cover' src={image} alt={name} />
           </div>
           <Link to={`/products/${id}`}>

@@ -2,7 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+body{
+    background-color: white;
+}
 
+    .clip-polygon {
+        clip-path: polygon(0 25%, 100% 0, 100% 100%, 0 100% );
+    }
+/*-----start--- Service Card Custom style ----- */
+    .card-photo-front-1 {
+        background-image: linear-gradient(to right bottom,
+        #55c57a, #28b485),
+            url('https://images.unsplash.com/photo-1554456854-55a089fd4cb2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-blend-mode: screen;
+            background-size: cover;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100% );
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100% );
+            background-position: center;
+    }
+    .card-photo-front-2 {
+        background-image: linear-gradient(to right bottom,
+        #2998ff, #5643fa),
+            url('https://images.unsplash.com/photo-1625794084867-8ddd239946b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-blend-mode: screen;
+            background-size: cover;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100% );
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100% );
+            background-position: center;
+    }
+    .card-photo-front-3 {
+        background-image: linear-gradient(to right bottom,
+        #ffb900, #ff7730),
+            url('https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80');
+            background-blend-mode: screen;
+            background-size: cover;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100% );
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100% );
+            background-position: center;
+    }
+    .card-heading-front {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        text-align: right;
+        color: red;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translateY(-90px);
+        
+    }
+    .card-span {
+        padding: 0.5rem 1.5rem;
+        font-weight: 300;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+    .card-span-1 {
+        background-image: linear-gradient(to right bottom,
+        #55c57a, #28b485); 
+    }
+    .card-span-2 {
+        background-image: linear-gradient(to right bottom,
+        #2998ff, #5643fa); 
+    }
+    .card-span-3 {
+        background-image: linear-gradient(to right bottom,
+        #ffb900, #ff7730); 
+    }
+ /*-----end--- Service Card Custom style ----- */
+ }
 /* Slick Libary CSS */
 .slick-arrow {
     display: none !important;

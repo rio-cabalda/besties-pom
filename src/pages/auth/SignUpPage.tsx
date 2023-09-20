@@ -30,7 +30,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const onSubmit = async(data: TSignUpSchema) =>{
-    const response = await axios.post('http://localhost:8080/user/register', data, {
+    const response = await axios.post('https://glamorous-tuna-lapel.cyclic.app/user/register', data, {
       headers: {
         'Content-Type': 'application/json',
       },

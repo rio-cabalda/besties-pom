@@ -12,7 +12,7 @@ type SidebarType= {
 const Sidebar = ({sidebarOpen,setSidebarOpen, navLink}:SidebarType) => {
 
   return (
-    <div className={sidebarOpen? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-40  duration-300': 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-40  duration-300'}>
+    <div className={sidebarOpen? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-50  duration-300': 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-50  duration-300'}>
         <AiOutlineClose size={30} onClick={()=>setSidebarOpen(!sidebarOpen)}  className='absolute right-4 top-4 cursor-pointer hover:text-red-600 transition-colors duration-300'/>
         <h2 className='text-2xl p-4'>
         Besties <span className='font-bold'>Pom</span>

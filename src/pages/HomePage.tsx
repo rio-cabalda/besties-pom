@@ -1,4 +1,4 @@
-import {Hero, FeaturedProducts} from '../components';
+import {Hero, FeaturedProducts, Services} from '../components';
 
 const HomePage = () => {
 
@@ -7,7 +7,7 @@ const HomePage = () => {
     <div className='max-w-screen-xl mx-auto flex flex-col'>
       <Hero/>
       <FeaturedProducts />
-      
+      <Services />
     </div>
   )
 }
