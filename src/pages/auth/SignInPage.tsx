@@ -3,10 +3,64 @@ import { SiDatadog } from 'react-icons/si';
 import { BiSolidHide, BiShow } from 'react-icons/bi';
 import {AiOutlineGithub, AiFillGooglePlusCircle} from 'react-icons/ai';
 import {BiLogoFacebookCircle} from 'react-icons/bi';
+import axios, { AxiosResponse, AxiosError } from 'axios';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
+
+const signIn = async (email: string, password: string): Promise<void> =>{
+    try {
+      // Define the API endpoint for signing in.
+       const signInEndpoint = 'https://glamorous-tuna-lapel.cyclic.app/user/login';
+
+      // Create a request payload with user credentials.
+       const requestBody = {
+        email: email,
+        password: password,
+      };
+      
+      // Make a POST request to the sign-in endpoint.
+      const response: AxiosResponse = await axios.post(signInEndpoint, requestBody);
+      // Check if the response indicates a successful sign-in.
+      if (response.status === 200) {
+        console.log('Sign-in successful',response.data);
+        console.log('Access token:', response.data.token);
+        // You can store the access token or user data in your application's state or local storage.
+      } else {
+        console.error('Sign-in failed');
+      }
+
+
+    } catch (error:unknown) {
+      // Handle any errors that occur during the sign-in process.
+    if (axios.isAxiosError(error)) {
+      const axiosError: AxiosError = error;
+      if (axiosError.response) {
+        console.error('Sign-in error:', axiosError.response.status, axiosError.response.data);
+      } else {
+        console.error('Network error:', error.message);
+      }
+    } else {
+      console.error('Error:', (error as Error).message);
+    }
+    }
+}
 
 const SignInPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
- 
+  const {
+    register,
+    handleSubmit,
+    formState: {errors,isSubmitting},
+    reset,
+  } = useForm<TSignInSchema>({
+    resolver: zodResolver(signInSchema)
+  });
+  const onSubmit = async(data: TSignInSchema) =>{
+        signIn(data.email,data.password);
+        reset();
+        
+  }
 
   return (
     <section className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>
@@ -19,43 +73,44 @@ const SignInPage = () => {
           </div>
               <h1 className='text-lg font-bold text-sky-700'>Sign in</h1>
               
-          <form action="" className='w-full flex flex-col justify-center text-lg'>
+          <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col justify-center text-lg gap-2'>
 
-            <div className='mt-3 h-10 relative flex'>
+            <div className='mt-3 relative flex'>
               <input 
               id='email'
-              className=' w-full h-9 border-[2px] border-transparent bg-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              {...register('email')}
+              className='w-full border-[2px] border-transparent bg-transparent border-b-2 border-b-sky-200 p-2 px-3 peer focus:bg-transparent focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type='email' 
               placeholder=' '/>
               <label htmlFor="email"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-6 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Email</label>
             </div>
 
-            <div className='mt-3 h-10 relative flex'>
+            <div className='mt-3 relative flex flex-col'>
               <input 
               id='password'
-              className=' w-full h-9 border-[2px] border-transparent bg-transparent  border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              {...register('password')}
+              className='w-full border-[2px] border-transparent bg-transparent border-b-2 border-b-sky-200 p-2 px-3 peer focus:bg-transparent focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={inputType}
               placeholder=' '/>
 
               <button
                       type="button"
-                      className="absolute bg-transparent text-lg inset-y-0 right-0 px-2 py-1 bg-gray-300 hover:scale-110 rounded-r cursor-pointer"
+                      className="absolute bg-transparent text-lg top-1 right-0 px-2 py-1 bg-gray-300 hover:scale-110 rounded-r cursor-pointer outline-none"
                       onClick={togglePasswordVisibility}
                     >
                       {visible ? <BiSolidHide/> : <BiShow/> }
               </button>
               <label htmlFor="password"
-              className='absolute text-[12px] text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 
-              peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[14px]
-              peer-focus:text-[12px] peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
+              className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-6 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Password</label>
+               <div className='min-h-[2rem] w-full px-2'>
+                {errors.password ? ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.password.message}</span>):null}
+              </div>
             </div>
 
-            <button className=' mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Sign in</button>
+            <button disabled={isSubmitting} className='mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Sign in</button>
           </form>
 
             {/* Horizontal line */}
