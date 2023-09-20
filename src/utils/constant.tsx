@@ -2,6 +2,7 @@
 import {MenuItemType, navLinkType} from '../types';
 import { ImHome } from 'react-icons/im';
 import {FaBoxOpen, FaShoppingCart, FaUserPlus, FaInfoCircle} from 'react-icons/fa';
+import { MdLogin } from 'react-icons/md';
 
 export const sidebarLinks:MenuItemType[] = [
     {
@@ -31,8 +32,14 @@ export const sidebarLinks:MenuItemType[] = [
     {
         id: 5,
         title: 'Sign in',
-        icon: <FaUserPlus />,
+        icon: <MdLogin />,
         link: '/signin'
+    },
+    {
+        id: 6,
+        title: 'Sign up',
+        icon: <FaUserPlus />,
+        link: '/signup'
     },
 ]
 
