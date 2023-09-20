@@ -24,7 +24,7 @@ const SignInPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='email'
-              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-9 border-[2px] border-transparent bg-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type='email' 
               placeholder=' '/>
               <label htmlFor="email"
@@ -37,7 +37,7 @@ const SignInPage = () => {
             <div className='mt-3 h-10 relative flex'>
               <input 
               id='password'
-              className=' w-full h-9 border-[2px] border-transparent border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
+              className=' w-full h-9 border-[2px] border-transparent bg-transparent  border-b-2 border-b-sky-200 px-3 peer focus:rounded-md focus:border-solid focus:border-[2px] focus:ring-0 focus:border-sky-500 outline-none'
               type={inputType}
               placeholder=' '/>
 
