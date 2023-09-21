@@ -3,17 +3,18 @@ import { SiDatadog } from 'react-icons/si';
 import { BiSolidHide, BiShow } from 'react-icons/bi';
 import {AiOutlineGithub, AiFillGooglePlusCircle} from 'react-icons/ai';
 import {BiLogoFacebookCircle} from 'react-icons/bi';
-import axios, { AxiosResponse, AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
 import useAuthStore from '../../store/authStore';
 import { useNavigate } from 'react-router-dom';
+import authUser from '../../utils/authUser';
+
 
 const SignInPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
-  const navigate = useNavigate();
-  const { login, user, accessToken } = useAuthStore();
+  const navigate = useNavigate(); 
+  const { user, accessToken } = useAuthStore();
   console.log('state user:',user);
   console.log('state accessToken:',accessToken); 
   const {
@@ -24,52 +25,15 @@ const SignInPage = () => {
   } = useForm<TSignInSchema>({
     resolver: zodResolver(signInSchema)
   });
+
   const onSubmit = async(data: TSignInSchema) =>{
-        await signIn(data.email, data.password);
-        reset();
-        
-  }
-
-  const signIn = async (email: string, password: string): Promise<void> =>{
-  
     try {
-      // Define the API endpoint for signing in.
-       const signInEndpoint = 'https://glamorous-tuna-lapel.cyclic.app/user/login';
-
-      // Create a request payload with user credentials.
-       const requestBody = {
-        email: email,
-        password: password,
-      };
-      
-      // Make a POST request to the sign-in endpoint.
-      const response: AxiosResponse = await axios.post(signInEndpoint, requestBody);
-      // Check if the response indicates a successful sign-in.
-      if (response.status === 200) {
-        // console.log('Sign-in successful',response.data);
-        // console.log('Access token:', response.data.accessToken);
-        // You can store the access token or user data in your application's state or local storage.
-        login(response.data.user, response.data.accessToken);
-        return navigate('/');
-      } else {
-        console.error('Sign-in failed');
-      }
-
-
-    } catch (error:unknown) {
-      // Handle any errors that occur during the sign-in process.
-    if (axios.isAxiosError(error)) {
-      const axiosError: AxiosError = error;
-      if (axiosError.response) {
-        console.error('Sign-in error:', axiosError.response.status, axiosError.response.data);
-      } else {
-        console.error('Network error:', error.message);
-      }
-    } else {
-        console.error('Error:', (error as Error).message);
-      }
-    }
-}
+      await authUser(data.email, data.password);
+      reset();
+    } catch (error) {
+      console.log('Sign in error', error);
+    } 
+  }
 
   if(user){
     return navigate('/');
