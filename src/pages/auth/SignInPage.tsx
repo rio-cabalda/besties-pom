@@ -7,8 +7,31 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
+import useAuthStore from '../../store/authStore';
+import { useNavigate } from 'react-router-dom';
 
-const signIn = async (email: string, password: string): Promise<void> =>{
+const SignInPage = () => {
+  const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
+  const navigate = useNavigate();
+  const { login, user, accessToken } = useAuthStore();
+  console.log('state user:',user);
+  console.log('state accessToken:',accessToken); 
+  const {
+    register,
+    handleSubmit,
+    formState: {errors,isSubmitting},
+    reset,
+  } = useForm<TSignInSchema>({
+    resolver: zodResolver(signInSchema)
+  });
+  const onSubmit = async(data: TSignInSchema) =>{
+        await signIn(data.email, data.password);
+        reset();
+        
+  }
+
+  const signIn = async (email: string, password: string): Promise<void> =>{
+  
     try {
       // Define the API endpoint for signing in.
        const signInEndpoint = 'https://glamorous-tuna-lapel.cyclic.app/user/login';
@@ -23,9 +46,11 @@ const signIn = async (email: string, password: string): Promise<void> =>{
       const response: AxiosResponse = await axios.post(signInEndpoint, requestBody);
       // Check if the response indicates a successful sign-in.
       if (response.status === 200) {
-        console.log('Sign-in successful',response.data);
-        console.log('Access token:', response.data.token);
+        // console.log('Sign-in successful',response.data);
+        // console.log('Access token:', response.data.accessToken);
         // You can store the access token or user data in your application's state or local storage.
+        login(response.data.user, response.data.accessToken);
+        return navigate('/');
       } else {
         console.error('Sign-in failed');
       }
@@ -41,25 +66,13 @@ const signIn = async (email: string, password: string): Promise<void> =>{
         console.error('Network error:', error.message);
       }
     } else {
-      console.error('Error:', (error as Error).message);
-    }
+        console.error('Error:', (error as Error).message);
+      }
     }
 }
 
-const SignInPage = () => {
-  const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
-  const {
-    register,
-    handleSubmit,
-    formState: {errors,isSubmitting},
-    reset,
-  } = useForm<TSignInSchema>({
-    resolver: zodResolver(signInSchema)
-  });
-  const onSubmit = async(data: TSignInSchema) =>{
-        signIn(data.email,data.password);
-        reset();
-        
+  if(user){
+    return navigate('/');
   }
 
   return (
@@ -110,7 +123,9 @@ const SignInPage = () => {
               </div>
             </div>
 
-            <button disabled={isSubmitting} className='mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Sign in</button>
+            <button disabled={isSubmitting} className='mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+              {isSubmitting? 'Signing in ....': 'Sign in'}
+              </button>
           </form>
 
             {/* Horizontal line */}
