@@ -8,13 +8,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
 import useAuthStore from '../../store/authStore';
 import { useNavigate } from 'react-router-dom';
-import authUser from '../../utils/authUser';
+import authenticateUser from '../../services/authenticateUser';
 
 
 const SignInPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
   const navigate = useNavigate(); 
-  const { user, accessToken } = useAuthStore();
+  const { login ,user, accessToken } = useAuthStore();
   console.log('state user:',user);
   console.log('state accessToken:',accessToken); 
   const {
@@ -28,15 +28,25 @@ const SignInPage = () => {
 
   const onSubmit = async(data: TSignInSchema) =>{
     try {
-      await authUser(data.email, data.password);
+     await authenticateUser(data.email, data.password,login).then(()=>{
+        setTimeout(() => {
+          navigate('/');
+          console.log('then works');
+          
+        }, 0);
+      });
       reset();
+      
     } catch (error) {
       console.log('Sign in error', error);
     } 
   }
 
   if(user){
-    return navigate('/');
+    setTimeout(() => {
+      navigate('/');
+      console.log('re-render works');
+    }, 0);
   }
 
   return (
