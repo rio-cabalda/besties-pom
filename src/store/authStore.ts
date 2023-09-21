@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type UserType = {
+export type UserType = {
     _id: string,
     email: string,
     firstname: string,
