@@ -13,7 +13,7 @@ export type AuthStateType = {
     accessToken: string | null;
     login: (user: UserType, token: string) => void;
     logout: () => void;
-    isAuthenticated: () => boolean;
+    // isAuthenticated: () => boolean;
 
 }
 
@@ -22,7 +22,7 @@ const useAuthStore = create<AuthStateType>((set)=>({
   accessToken: null,
   login: (user, accessToken) => set({ user, accessToken }),
   logout: () => set({ user: null, accessToken: null }),
-  isAuthenticated: () => !!set().user && !!set().accessToken,
+//   isAuthenticated: () => !!set().user && !!set().accessToken,
 }));
 
 export default useAuthStore;
