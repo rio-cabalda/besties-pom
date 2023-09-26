@@ -6,17 +6,18 @@ import {BiLogoFacebookCircle} from 'react-icons/bi';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
-import useAuthStore from '../../store/authStore';
 import { useNavigate } from 'react-router-dom';
-import authenticateUser from '../../services/authenticateUser';
-
+import { StorageEnum } from '../../types';
+import useAuthStore from '../../store/authStore';
+import axiosPrivate from '../../api/useAxiosConfig';
+import toast  from 'react-hot-toast';
+import axios, { AxiosError } from 'axios';
 
 const SignInPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
   const navigate = useNavigate(); 
-  const { login ,user, accessToken } = useAuthStore();
-  console.log('state user:',user);
-  console.log('state accessToken:',accessToken); 
+  const {user, fetchUser} = useAuthStore();
+
   const {
     register,
     handleSubmit,
@@ -25,29 +26,49 @@ const SignInPage = () => {
   } = useForm<TSignInSchema>({
     resolver: zodResolver(signInSchema)
   });
-
+axiosPrivate
   const onSubmit = async(data: TSignInSchema) =>{
     try {
-     await authenticateUser(data.email, data.password,login).then(()=>{
-        setTimeout(() => {
-          navigate('/');
-          console.log('then works');
-          
-        }, 0);
-      });
-      reset();
+      const response = await axiosPrivate.post('/user/login', data);
+      console.log(response);
       
+      if (response.status === 200) {
+        // Login successful
+        const { accessToken } = response.data;
+        localStorage.setItem(StorageEnum.StorageString, accessToken);
+        fetchUser();
+        toast.success(<b>Successfully logged in!</b>,{duration: 3000});
+        navigate('/');
+      } else {
+        toast.error(<b>{response?.data?.error ? response.data.error:'Login failed'}</b>);
+       }
     } catch (error) {
-      console.log('Sign in error', error);
+      if (axios.isAxiosError(error)) {
+        // Check if it's an Axios error
+        const axiosError: AxiosError = error;
+        if (axiosError.response) {
+          // Access the status code
+          const statusCode = axiosError.response.status;
+          if(statusCode === 401){
+             toast.error(<b>Incorrect Password</b>);
+          }else{
+             toast.error(<b>Login failed</b>);
+          }
+        }
+      } else {
+        // Handle other types of errors
+        console.error('An error occurred:', error);
+      }
     } 
+    reset();
   }
 
   if(user){
     setTimeout(() => {
       navigate('/');
-      console.log('re-render works');
     }, 0);
   }
+
 
   return (
     <section className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>

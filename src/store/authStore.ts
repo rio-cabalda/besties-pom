@@ -1,28 +1,29 @@
 import { create } from "zustand";
-
-export type UserType = {
-    _id: string,
-    email: string,
-    firstname: string,
-    lastname: string,
-    cart: [],
-}
+import { StorageEnum, UserType } from "../types";
+import axiosPrivate from "../api/useAxiosConfig";
 
 export type AuthStateType = {
-    user: UserType | null;
-    accessToken: string | null;
-    login: (user: UserType, token: string) => void;
-    logout: () => void;
-    // isAuthenticated: () => boolean;
-
+  user: UserType | null;
+  isAuthenticated: boolean;
+  fetchUser: () => Promise<void | null>;
+  logoutUser: () => void;
 }
 
-const useAuthStore = create<AuthStateType>((set)=>({
+const useAuthStore = create<AuthStateType>((set) => ({
   user: null,
-  accessToken: null,
-  login: (user, accessToken) => set({ user, accessToken }),
-  logout: () => set({ user: null, accessToken: null }),
-//   isAuthenticated: () => !!set().user && !!set().accessToken,
+  isAuthenticated:false,
+  fetchUser: async () => {
+    try {
+     const response = await axiosPrivate.get('/user/auth');
+     set({user:response.data, isAuthenticated: true});
+    } catch (error) {
+      console.error('Zustand fetching error:', error);
+    }
+  },
+  logoutUser: ()=>{
+    localStorage.removeItem(StorageEnum.StorageString)
+    set({user: null, isAuthenticated: false});
+  }
 }));
 
 export default useAuthStore;

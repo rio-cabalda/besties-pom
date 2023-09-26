@@ -7,26 +7,29 @@ import logo from '../assets/logo-192px.png';
 import {SearchBar, Sidebar} from '.';
 import { useProductStore } from '../store/productStore';
 import useCurrentPath from '../hooks/useCurrentPath';
+import useAuthStore from '../store/authStore';
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [navLink, setNavLink] = useState<string>('');
   const navRef = useRef<HTMLHeadingElement | null>(null);
-  const { navHeight,setNavHeight } = useProductStore();
+  const { setNavHeight } = useProductStore();
   const {pathname} = useLocation();
   const path = useCurrentPath(pathname.toString());
+  const {user,fetchUser,logoutUser} = useAuthStore();
 
+  //flexible height of the nav bar will use to set the margin-top of the content.
   useEffect(() => {
-    
     if (navRef.current) {
       const height = navRef.current.offsetHeight;
       setNavHeight(height);    
     }
+    fetchUser();
     setNavLink(path);
-
     // eslint-disable-next-line
-  }, [navHeight, pathname]);
+  }, [pathname]);
 
+  
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
     <header ref={navRef} className='w-full bg-white shadow-sm fixed top-0 left-0 z-30'>
@@ -66,21 +69,29 @@ const Navbar = () => {
         </ul>
 
         {/* cart button and log in */}
-        <div className='hidden md:flex gap-5 items-center'>
-          <div className=''>
-            <Link to='cart' className='relative flex justify-center items-center text-xl'>
-              <BsBag />
-              <span className='absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
-            </Link>
-          </div>
-
-          <div className='transform hover:scale-105 duration-200'>
-            <Link to='signin' className='font-bold hover:text-sky-500'>
-                Sign In
-            </Link>
-          </div>
-        </div>
-          
+        {user? 
+            <div className='pl-2 flex items-center gap-5'>
+              <div>
+                <Link to='cart' className='relative flex justify-center items-center text-xl'>
+                  <BsBag />
+                  <span className='absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
+                </Link>
+              </div>
+              <div className='capitalize'>
+                <span>{user.firstname}</span>
+                <button className='p-3 bg-sky-600' type='button' onClick={logoutUser}>Logout</button>
+              </div>
+            </div>
+            :
+            <div className='hidden md:inline-block'>
+              <div className='transform hover:scale-105 duration-200'>
+                <Link to='signin' className='font-bold hover:text-sky-500'>
+                    Sign In
+                </Link>
+              
+              </div>
+            </div>
+           }
         {/* mobile menu */}
         {/* overlay */}
         {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-40 top-0 left-0' onClick={()=>setSidebarOpen(!sidebarOpen)}></div> : null}

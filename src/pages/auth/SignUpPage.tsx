@@ -4,9 +4,9 @@ import {usePasswordToggle, useConfirmPasswordToggle} from '../../hooks';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, TSignUpSchema } from '../../types/SignUpTypes';
-import axios from 'axios';
 import toast  from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import axiosPrivate from '../../api/useAxiosConfig';
 
 export type UserType = {
   firstname: string;
@@ -28,13 +28,9 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema)
   });
   const navigate = useNavigate();
-
+axiosPrivate
   const onSubmit = async(data: TSignUpSchema) =>{
-    const response = await axios.post('https://glamorous-tuna-lapel.cyclic.app/user/register', data, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axiosPrivate.post('/user/register', data);
 
     if (response.status === 201) {
       // Success: HTTP status code 200

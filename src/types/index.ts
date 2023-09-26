@@ -41,3 +41,15 @@ export enum SortOption {
    sortProducts: (sortValue:string) =>void;
    sortByCategory: (category:string) =>void;
 }
+
+export type UserType = {
+   _id: string,
+   email: string,
+   firstname: string,
+   lastname: string,
+   cart: [],
+}
+
+export enum StorageEnum {
+   StorageString = 'bestiespom-token',
+ }

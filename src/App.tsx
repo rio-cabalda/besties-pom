@@ -3,7 +3,8 @@ import {Navbar,Footer} from "./components";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home,Products, Error, SingleProduct } from "./pages";
 import { useProductStore } from "./store/productStore";
-
+import Checkout from "./pages/Checkout";
+import PrivateRoute from "./pages/PrivateRoute";
 
 function App() {
   const {navHeight} = useProductStore(); //height of nav(fixed position) use to margin top
@@ -21,6 +22,11 @@ function App() {
             <Route path='signin' element={<SignIn/>} />
             <Route path='products' element={<Products/>} />
             <Route path='products/:id' element={<SingleProduct />} />
+            <Route path="checkout" element={
+                      <PrivateRoute >
+                            <Checkout />
+                      </PrivateRoute>
+            } />
             <Route path='*' element={<Error />} />
           </Routes>
         </main>
