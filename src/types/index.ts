@@ -31,7 +31,6 @@ export enum SortOption {
  export type ProductStoreType = {
    products: ProductItemType[]; 
    showedProducts: ProductItemType[];
-   featuredProducts: ProductItemType[];
    category: string[];
    navHeight: number;
    searchValue: string;
