@@ -21,7 +21,7 @@ const Product:React.FC<ProductProps> = ({item}) => {
           </div>
           <Link to={`/products/${id}`}>
               <div className='absolute top-0 left-0 w-full h-full bg-black/70 flex justify-center items-center opacity-0 duration-300
-              group-hover:opacity-100 text-sky-400 text-3xl'>
+              group-hover:opacity-100 text-sky-400 text-3xl '>
               <BiSearchAlt />
               </div>
           </Link>
