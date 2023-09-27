@@ -1,14 +1,10 @@
-import { randomFeatured } from '../hooks';
 import { SortOption, ProductStoreType} from '../types';
 import { create } from 'zustand';
-
-
 
 export const useProductStore = create<ProductStoreType>((set) => ({
   products: [],
   showedProducts: [],
   category: [],
-  featuredProducts: [],
   navHeight: 0,
   setNavHeight: (height)=>{( set({navHeight:height}))},
   searchValue: '',
@@ -21,7 +17,6 @@ export const useProductStore = create<ProductStoreType>((set) => ({
       
     } catch (error) {
       console.log(error);
-      
     }
   },
   setProducts: (products) => {
@@ -31,13 +26,12 @@ export const useProductStore = create<ProductStoreType>((set) => ({
       if(newShowedProducts.length > 0){
       const uniqueCategoriesSet = new Set(newShowedProducts.map((product) => product.category.toLocaleLowerCase()));
       const uniqueCategoriesArray = ['all',...uniqueCategoriesSet];
-      set((state)=>({ products, showedProducts: state.searchValue? state.showedProducts: newShowedProducts, category:uniqueCategoriesArray, featuredProducts:randomFeatured(products, 4) }));
+        
+      set((state)=>({ products, showedProducts: state.searchValue? state.showedProducts: newShowedProducts, category:uniqueCategoriesArray }));
       }
     } catch (error) {
       console.log(error)
     }
-    
-    
   },
   sortProducts: (sortValue)=>{
     try {
