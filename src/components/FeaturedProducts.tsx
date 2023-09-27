@@ -1,12 +1,21 @@
+import { useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Product, SectionTitle } from ".";
-import { useFetchData } from "../hooks";
-import { useProductStore } from "../store/productStore"
+import { useAllProducts } from "../hooks/useFetchProducts";
 import { ProductItemType } from "../types";
+import useFeaturedProducts from '../hooks/useFeaturedProducts';
 
 const FeaturedProducts = () => {
-  const {isLoading, isError} = useFetchData();
-  const {featuredProducts} = useProductStore();
+  const [featuredProducts,setFeaturedProducts] = useState<ProductItemType[] | []>([]);
+  const { allProducts=[], isLoading, isError } = useAllProducts();
+ const featured = useFeaturedProducts(allProducts,4);
+
+  useEffect(()=>{
+  if(allProducts){
+   setFeaturedProducts(featured);
+  }
+  // eslint-disable-next-line
+},[isLoading])
 
   if(isLoading){
     return (
@@ -34,10 +43,10 @@ const FeaturedProducts = () => {
     )}      
     
   return (
-    <section className='w-full pt-10 md:pt-14 bg-[rgb(241,245,248)] -skew-y-3 -translate-y-6 md:-skew-y-2 lg:-translate-y-7 z-10 overflow-hidden'>
+    <section className='w-full pt-10 md:pt-14 bg-[rgb(241,245,248)] -skew-y-3 -translate-y-6 md:-skew-y-2 lg:-translate-y-7 z-10'>
         <article className='skew-y-3 md:skew-y-2 my-6 pb-10 flex flex-col justify-center items-center'>
           <SectionTitle title={'Explore a Pawsome Collection of Pet Products'}/>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 p-4">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 overflow-hidden">
             {featuredProducts.map((item:ProductItemType)=>(<Product key={item._id} item={item}/>))}
           </div>
 
