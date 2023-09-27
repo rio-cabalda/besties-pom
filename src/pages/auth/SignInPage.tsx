@@ -30,7 +30,6 @@ axiosPrivate
   const onSubmit = async(data: TSignInSchema) =>{
     try {
       const response = await axiosPrivate.post('/user/login', data);
-      console.log(response);
       
       if (response.status === 200) {
         // Login successful
