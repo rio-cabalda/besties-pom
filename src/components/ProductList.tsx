@@ -1,12 +1,21 @@
 import { ProductItemType } from '../types';
 import { useProductStore } from '../store/productStore';
 import {Product} from '.';
-import { useFetchData } from '../hooks';
 import errorImage from '../assets/sad_dog.png'
-
+import { useAllProducts } from '../hooks/useFetchProducts';
+import {useEffect} from 'react';
 const ProductList = () => {
-  const { showedProducts} = useProductStore();
-  const { isLoading, isError } = useFetchData();
+    
+    const { showedProducts, setProducts} = useProductStore();
+    const { allProducts, isLoading, isError } = useAllProducts();
+    
+    useEffect(()=>{
+        if(allProducts){
+            setProducts(allProducts);
+        }
+        // eslint-disable-next-line
+    },[isLoading])
+
 
  if(isLoading){
     return (
@@ -18,7 +27,7 @@ if(isError){
         <section className='w-full flex flex-col justify-center items-center gap-10'>
             <div className="flex-1 w-full bg-red-100 text-red-600 border border-red-400 rounded p-4 flex flex-col justify-center items-center">
                 <h2 className="font-semibold text-lg mb-2">Something Went Wrong</h2>
-                <p className="text-sm">Sorry, we encountered an error while loading the data.</p>
+                <p className="text-sm">Sorry, we encountered an error while loading the product.</p>
             </div>
             <div className='w-60 h-60 translate-y-1/2'>
                 <img className='w-full object-cover' src={errorImage} alt="Dog" />
