@@ -1,26 +1,25 @@
 import {useState, useRef, useEffect} from 'react';
 import { AiOutlineMenu} from 'react-icons/ai';
 import { Link, useLocation } from 'react-router-dom';
-import { BsBag } from 'react-icons/bs';
 import { navLinks } from '../utils/constant';
 import logo from '../assets/logo-192px.png';
 import {SearchBar, Sidebar} from '.';
 import { useProductStore } from '../store/productStore';
 import useCurrentPath from '../hooks/useCurrentPath';
-import useAuthStore from '../store/authStore';
-import { AxiosError } from 'axios';
-import axiosPrivate from '../api/useAxiosConfig';
+import NavCart from './NavCart';
+
+
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-  const [loggingOut, setLoggingOut] = useState<boolean>(false);
   const [navLink, setNavLink] = useState<string>('');
   const navRef = useRef<HTMLHeadingElement | null>(null);
   const { setNavHeight } = useProductStore();
   const {pathname} = useLocation();
   const path = useCurrentPath(pathname.toString());
-  const {user, setlogoutUser, fetchUser,isAuthenticated} = useAuthStore();
 
+
+  
   //flexible height of the nav bar will use to set the margin-top of the content.
   useEffect(() => {
     if (navRef.current) {
@@ -31,35 +30,9 @@ const Navbar = () => {
     // eslint-disable-next-line
   }, [pathname]);
 
-  const logoutUser = async () => {
-    setLoggingOut(false);
-    try {
-      await axiosPrivate.post('/user/logout');
-      setLoggingOut(true);
-      setlogoutUser();
-    } catch (error) {
-      const axiosError = error as AxiosError;
-      throw new Error(axiosError.message);
-    } finally{
-      setLoggingOut(true)
-    }
-  }
-useEffect(()=>{
-  const getUser = async() =>{
-    try {
-      const response = await axiosPrivate.get('/user/auth');
-      const {user} = response.data;
-      fetchUser(user);
-    } catch (error) {
-      console.log(error);
-      
-  }
-}
-if(!isAuthenticated){
-  getUser();
-}
-   // eslint-disable-next-line
-},[]);
+ 
+
+
   
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
@@ -100,29 +73,7 @@ if(!isAuthenticated){
         </ul>
 
         {/* cart button and log in */}
-        {user? 
-            <div className='pl-2 flex items-center gap-5'>
-              <div>
-                <Link to='cart' className='relative flex justify-center items-center text-xl'>
-                  <BsBag />
-                  <span className='absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
-                </Link>
-              </div>
-              <div className='capitalize'>
-                <span>{user.firstname}</span>
-                <button className='p-3 bg-sky-600' type='button' onClick={logoutUser}>{loggingOut? 'Logging out...':'Logout'}</button>
-              </div>
-            </div>
-            :
-            <div className='hidden md:inline-block'>
-              <div className='transform hover:scale-105 duration-200'>
-                <Link to='signin' className='font-bold hover:text-sky-500'>
-                    Sign In
-                </Link>
-              
-              </div>
-            </div>
-           }
+        <NavCart />
         {/* mobile menu */}
         {/* overlay */}
         {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-40 top-0 left-0' onClick={()=>setSidebarOpen(!sidebarOpen)}></div> : null}
