@@ -21,6 +21,11 @@ export type ProductItemType = {
    rating: number;
    stock: number;
 }
+export type SingleProductType = {
+   singleProduct: ProductItemType;
+   isLoading: boolean;
+   isError: boolean;
+ }
 export enum SortOption {
    PriceLowest = 'price-lowest',
    PriceHighest = 'price-highest',
