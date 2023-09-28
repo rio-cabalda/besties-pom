@@ -18,7 +18,8 @@ const SingleProduct = () => {
 
   const {id=''} = useParams();
   const {singleProduct=defaultSingleProduct, isLoading, isError} = useSingleProduct(id);
-   const {_id, name, image, description, category, price, rating, stock} = singleProduct; 
+  //  const {_id, name, image, description, category, price, rating, stock} = singleProduct; 
+  const { name, image, rating } = singleProduct; 
 
   console.log(singleProduct);
   
