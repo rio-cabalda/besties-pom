@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, TSignUpSchema } from '../../types/SignUpTypes';
 import toast  from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import axiosPrivate from '../../api/useAxiosConfig';
+import {axiosInstance} from '../../api/useAxiosConfig';
 
 export type UserType = {
   firstname: string;
@@ -28,9 +28,9 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema)
   });
   const navigate = useNavigate();
-axiosPrivate
+
   const onSubmit = async(data: TSignUpSchema) =>{
-    const response = await axiosPrivate.post('/user/register', data);
+    const response = await axiosInstance.post('/user/register', data);
 
     if (response.status === 201) {
       // Success: HTTP status code 200

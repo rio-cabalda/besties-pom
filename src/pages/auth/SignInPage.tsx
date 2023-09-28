@@ -9,14 +9,14 @@ import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
 import { useNavigate } from 'react-router-dom';
 import { StorageEnum } from '../../types';
 import useAuthStore from '../../store/authStore';
-import axiosPrivate from '../../api/useAxiosConfig';
+import axiosPrivate, {axiosInstance} from '../../api/useAxiosConfig';
 import toast  from 'react-hot-toast';
 import axios, { AxiosError } from 'axios';
 
 const SignInPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
   const navigate = useNavigate(); 
-  const {user, fetchUser} = useAuthStore();
+  const { fetchUser, isAuthenticated} = useAuthStore();
 
   const {
     register,
@@ -26,16 +26,18 @@ const SignInPage = () => {
   } = useForm<TSignInSchema>({
     resolver: zodResolver(signInSchema)
   });
-axiosPrivate
+
   const onSubmit = async(data: TSignInSchema) =>{
     try {
-      const response = await axiosPrivate.post('/user/login', data);
+      const response = await axiosInstance.post('/user/login', data);
       
       if (response.status === 200) {
         // Login successful
         const { accessToken } = response.data;
         localStorage.setItem(StorageEnum.StorageString, accessToken);
-        fetchUser();
+        const resUser = await axiosPrivate.get('/user/auth');
+        const {user} = resUser.data;
+         fetchUser(user);
         toast.success(<b>Successfully logged in!</b>,{duration: 3000});
         navigate('/');
       } else {
@@ -62,7 +64,7 @@ axiosPrivate
     reset();
   }
 
-  if(user){
+  if(isAuthenticated){
     setTimeout(() => {
       navigate('/');
     }, 0);

@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import axiosPrivate from '../api/useAxiosConfig';
+import {axiosInstance} from '../api/useAxiosConfig';
 import { AxiosError } from 'axios';
 
 // Define the function to fetch data from your API
@@ -7,7 +7,7 @@ export const useAllProducts = () => {
 
     const { data:allProducts, isLoading, isError } = useQuery('products', async() => {
       try {
-      const response = await axiosPrivate.get('/products');
+      const response = await axiosInstance.get('/products');
       const { products } = response.data;
       if(products){
         return products;
@@ -26,7 +26,7 @@ export const useAllProducts = () => {
  export const useSingleProduct = (id:string) => {
     const {data:singleProduct, isLoading, isError} = useQuery('singleProduct', async()=>{
         try {
-          const response = await axiosPrivate(`/product/${id}`);
+          const response = await axiosInstance(`/product/${id}`);
           const { product } = response.data;
           if(product){
             return product;

@@ -8,15 +8,18 @@ import {SearchBar, Sidebar} from '.';
 import { useProductStore } from '../store/productStore';
 import useCurrentPath from '../hooks/useCurrentPath';
 import useAuthStore from '../store/authStore';
+import { AxiosError } from 'axios';
+import axiosPrivate from '../api/useAxiosConfig';
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [loggingOut, setLoggingOut] = useState<boolean>(false);
   const [navLink, setNavLink] = useState<string>('');
   const navRef = useRef<HTMLHeadingElement | null>(null);
   const { setNavHeight } = useProductStore();
   const {pathname} = useLocation();
   const path = useCurrentPath(pathname.toString());
-  const {user,fetchUser,logoutUser} = useAuthStore();
+  const {user, setlogoutUser, fetchUser,isAuthenticated} = useAuthStore();
 
   //flexible height of the nav bar will use to set the margin-top of the content.
   useEffect(() => {
@@ -24,11 +27,39 @@ const Navbar = () => {
       const height = navRef.current.offsetHeight;
       setNavHeight(height);    
     }
-    fetchUser();
     setNavLink(path);
     // eslint-disable-next-line
   }, [pathname]);
 
+  const logoutUser = async () => {
+    setLoggingOut(false);
+    try {
+      await axiosPrivate.post('/user/logout');
+      setLoggingOut(true);
+      setlogoutUser();
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      throw new Error(axiosError.message);
+    } finally{
+      setLoggingOut(true)
+    }
+  }
+useEffect(()=>{
+  const getUser = async() =>{
+    try {
+      const response = await axiosPrivate.get('/user/auth');
+      const {user} = response.data;
+      fetchUser(user);
+    } catch (error) {
+      console.log(error);
+      
+  }
+}
+if(!isAuthenticated){
+  getUser();
+}
+   // eslint-disable-next-line
+},[]);
   
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
@@ -79,7 +110,7 @@ const Navbar = () => {
               </div>
               <div className='capitalize'>
                 <span>{user.firstname}</span>
-                <button className='p-3 bg-sky-600' type='button' onClick={logoutUser}>Logout</button>
+                <button className='p-3 bg-sky-600' type='button' onClick={logoutUser}>{loggingOut? 'Logging out...':'Logout'}</button>
               </div>
             </div>
             :

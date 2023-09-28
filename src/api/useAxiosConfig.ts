@@ -1,9 +1,14 @@
 import axios from 'axios';
 import { StorageEnum } from '../types';
 
-const BASE_URL = 'https://glamorous-tuna-lapel.cyclic.app';
+const BASE_URL = 'http://localhost:3000';
 
-export const axiosPrivate = axios.create({
+export const axiosInstance = axios.create({
+    baseURL: BASE_URL,
+    headers: {'Content-Type': 'application/json'}
+});
+
+const axiosPrivate = axios.create({
     baseURL: BASE_URL,
     headers: {'Content-Type': 'application/json'}
 });
