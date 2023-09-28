@@ -1,12 +1,25 @@
 import { useParams } from "react-router-dom"
 import { useSingleProduct } from "../hooks/useFetchProducts";
-import errorImage from '../assets/sad_dog.png'
-
+import errorImage from '../assets/sad_dog.png';
+import prodduct from '../assets/product.png';
+import CustomerRating from '../components/CustomerRating';
 
 const SingleProduct = () => {
+  const defaultSingleProduct = {
+    _id: '',
+    name: '',
+    image: '',
+    description: '',
+    category: '',
+    price: 0,
+    rating: 0,
+    stock: 0,
+  }
+
   const {id=''} = useParams();
-  const {singleProduct, isLoading, isError} = useSingleProduct(id);
-  
+  const {singleProduct=defaultSingleProduct, isLoading, isError} = useSingleProduct(id);
+   const {_id, name, image, description, category, price, rating, stock} = singleProduct; 
+
   console.log(singleProduct);
   
   if(isLoading){
@@ -28,9 +41,34 @@ if(isError){
     )}
   
   return (
-    <section className="h-screen w-full flex justify-center items-center bg-red-300">
+    <div className="max-w-screen-xl mx-auto pt-16">
+      <div className="p-2">
+         <button className="bg-transparent rounded-full border-2 border-sky-500 py-2 px-16">{'<='}</button>
+      </div>
+      <div className="bg-white w-full h-screen grid grid-cols-2 gap-16">
+          <section className="w-full h-screen ">
+            <div className="relative w-full h-[30rem] p-5 rounded-lg shadow-lg overflow-hidden">
+              {image ? 
+              <img className="w-full h-full object-contain" src={image} alt={name} /> 
+              : 
+              <>
+              <img className='w-full h-full object-contain' src={prodduct} alt="Product" />
+              <a className="absolute bottom-0 left-3 text-slate-600" href="https://www.flaticon.com/free-icons/product" title="product icons">Product icons created by Freepik - Flaticon</a>
+              </>}
+            </div>
+          </section>
+            
+          <section className="w-full h-screen text-slate-700">
+            <h2 className="text-4xl font-bold">{name}</h2>
+            <div className="py-3 flex items-center gap-2 ">
+              <CustomerRating rating={rating}/>
+              <p className="reviews text-xl lg:text-base leading-none">({150*rating} customer reviews)</p>
+            </div>
+          </section>
 
-    </section>
+      </div>
+
+    </div>
   )
 }
 
