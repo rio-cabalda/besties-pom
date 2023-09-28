@@ -10,8 +10,8 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
-    <Toaster position="top-center"/>
-    <App />
+      <Toaster position="top-center"/>
+      <App />
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 )
