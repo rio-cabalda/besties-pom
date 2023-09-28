@@ -6,17 +6,27 @@ import {BiLogoFacebookCircle} from 'react-icons/bi';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
-import { useNavigate } from 'react-router-dom';
 import { StorageEnum } from '../../types';
 import useAuthStore from '../../store/authStore';
 import axiosPrivate, {axiosInstance} from '../../api/useAxiosConfig';
 import toast  from 'react-hot-toast';
 import axios, { AxiosError } from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useCheckAuthUser from '../../api/checkAuthUser';
+import { useEffect } from 'react';
 
 const SignInPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
-  const navigate = useNavigate(); 
   const { fetchUser, isAuthenticated} = useAuthStore();
+  const checkUser = useCheckAuthUser();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || '/';
+  console.log(location);
+
+  useEffect(()=>{checkUser},
+  //eslint-disable-next-line
+  []);
 
   const {
     register,
@@ -39,7 +49,7 @@ const SignInPage = () => {
         const {user} = resUser.data;
          fetchUser(user);
         toast.success(<b>Successfully logged in!</b>,{duration: 3000});
-        navigate('/');
+        navigate(from);
       } else {
         toast.error(<b>{response?.data?.error ? response.data.error:'Login failed'}</b>);
        }
@@ -66,7 +76,7 @@ const SignInPage = () => {
 
   if(isAuthenticated){
     setTimeout(() => {
-      navigate('/');
+      navigate(from);
     }, 0);
   }
 
