@@ -2,7 +2,7 @@ import { ProductItemType } from '../types';
 import { useProductStore } from '../store/productStore';
 import {Product} from '.';
 import errorImage from '../assets/sad_dog.png'
-import { useAllProducts } from '../hooks/useFetchProducts';
+import { useAllProducts } from '../api/useFetchProducts';
 import {useEffect} from 'react';
 const ProductList = () => {
     
