@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Product, SectionTitle } from ".";
-import { useAllProducts } from "../hooks/useFetchProducts";
+import { useAllProducts } from "../api/useFetchProducts";
 import { ProductItemType } from "../types";
 import useFeaturedProducts from '../hooks/useFeaturedProducts';
 
