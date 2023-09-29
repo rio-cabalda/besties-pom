@@ -87,3 +87,7 @@ body{
 .slick-dots li button:before {
     font-size: 0.7rem;
 }
+
+.slick-list {
+    background: red!;
+}
