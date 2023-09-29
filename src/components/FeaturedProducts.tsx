@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Product, SectionTitle } from ".";
 import { useAllProducts } from "../api/useFetchProducts";
 import { ProductItemType } from "../types";
-import useFeaturedProducts from '../hooks/useFeaturedProducts';
+import {useFeaturedProducts} from '../hooks';
 
 const FeaturedProducts = () => {
   const [featuredProducts,setFeaturedProducts] = useState<ProductItemType[] | []>([]);
