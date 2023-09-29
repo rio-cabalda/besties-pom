@@ -14,9 +14,9 @@ const Product:React.FC<ProductProps> = ({item}) => {
 
 
   return (
-    <div key={id} className='bg-sky-100 rounded-lg shadow-md overflow-hidden'>
+    <div key={id} className='bg-sky-100 rounded-lg shadow-md overflow-hidden flex-grow'>
       <div className='relative group bg-white'>
-          <div className='h-64 g:h-72'>
+          <div className='h-64 lg:h-72'>
               <img className='w-full h-full object-cover' src={image} alt={name} />
           </div>
           <Link to={`/products/${id}`}>
@@ -27,11 +27,11 @@ const Product:React.FC<ProductProps> = ({item}) => {
           </Link>
       </div>
       <footer className='p-4 flex flex-col gap-2  text-xs lg:text-base'>
-          <div className='flex flex-col gap-1 justify-start md:flex-row md:justify-between'>
+          <div className='h-10 flex flex-col gap-1 justify-start md:flex-row md:justify-between'>
               <h5 className='font-semibold text-xs lg:text-sm'>{name}</h5>
               <p className='md:ml-5 text-xs lg:text-sm'>{useFormatPrice(price)}</p>
           </div>
-          <div className='h-full text-[10px] flex flex-col items-start gap-1  md:flex-row md:items-center'>
+          <div className='text-[10px] flex flex-col items-start gap-1  md:flex-row md:items-center'>
               <CustomerRating rating={rating} />
               <p className="reviews text-[10px] lg:text-xs leading-none">({150*rating} sold)</p>
           </div>
