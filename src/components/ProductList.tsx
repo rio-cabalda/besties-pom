@@ -8,6 +8,7 @@ const ProductList = () => {
     
     const { showedProducts, setProducts} = useProductStore();
     const { allProducts, isLoading, isError } = useAllProducts();
+    console.log(allProducts);
     
     useEffect(()=>{
         if(allProducts){
