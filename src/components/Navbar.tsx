@@ -5,7 +5,7 @@ import { navLinks } from '../utils/constant';
 import logo from '../assets/logo-192px.png';
 import {SearchBar, Sidebar} from '.';
 import { useProductStore } from '../store/productStore';
-import useCurrentPath from '../hooks/useCurrentPath';
+import {useCurrentPath} from '../hooks';
 import NavCart from './NavCart';
 
 
