@@ -2,16 +2,14 @@ import { Link, useNavigate, useLocation, useParams } from "react-router-dom"
 import { useSingleProduct } from "../api/useFetchProducts";
 import errorImage from '../assets/sad_dog.png';
 import product from '../assets/product.png';
-import CustomerRating from '../components/CustomerRating';
 import { useFormatPrice } from "../hooks";
 import { SingleProductType } from "../types";
-import AddToCart from "../components/AddToCart";
+import {AddToCart, RelatedProducts, CustomerRating} from "../components";
 import { useEffect, useState } from "react";
 import axiosPrivate from "../api/useAxiosConfig";
 import { AxiosError } from "axios";
 import useCheckAuthUser from "../api/checkAuthUser";
 import useAuthStore from "../store/authStore";
-
 
 const SingleProduct = () => {
   const navigate = useNavigate();
@@ -38,6 +36,8 @@ const SingleProduct = () => {
   const checkUser = useCheckAuthUser();
   const currentLocation = location.pathname;
 
+
+ 
   const addToCart = async() => {
     setIsSubmitting(true);
     try {
@@ -115,13 +115,14 @@ if(isError){
 
             {/* add to cart */}
             <div className="p-5">
-              {isAuthenticated? <>{stock > 0 ? <AddToCart product={singleProduct} addToCart={addToCart} isSubmitting={isSubmitting} quantity={quantity} setQuantity={setQuantity}/>: null}</>: <button onClick={()=>navigate('/signin', { state: { from: currentLocation } })} className='uppercase bg-gradient-to-tr from-sky-400 to-sky-600 px-5 py-2 rounded-lg text-slate-200 shadow-sm hover:from-sky-200 hover:to-sky-400 hover:text-slate-400 hover:shadow-lg'>Sign in</button>}
-                
+              {isAuthenticated? <>{stock > 0 ? <AddToCart product={singleProduct} addToCart={addToCart} isSubmitting={isSubmitting} quantity={quantity} setQuantity={setQuantity}/>: null}</>: <button onClick={()=>navigate('/signin', { state: { from: currentLocation } })} className='uppercase bg-gradient-to-tr from-sky-400 to-sky-600 px-5 py-2 rounded-lg text-slate-200 shadow-sm hover:from-sky-200 hover:to-sky-400 hover:text-slate-400 hover:shadow-lg'>Sign in</button>} 
             </div>
-
           </section>
-
       </div>
+
+      
+      <RelatedProducts category={category}/>
+      
 
     </div>
   )
