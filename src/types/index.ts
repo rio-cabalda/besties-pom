@@ -47,11 +47,12 @@ export enum SortOption {
 }
 
 export type UserType = {
-   _id: string,
-   email: string,
-   firstname: string,
-   lastname: string,
-   cart: [],
+   _id: string;
+   image: string;
+   email: string;
+   firstname: string;
+   lastname: string;
+   cart: [];
 }
 
 export enum StorageEnum {
