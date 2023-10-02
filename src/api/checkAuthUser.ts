@@ -11,7 +11,6 @@ const useCheckAuthUser = async () =>{
           try {
             const response = await axiosPrivate.get('/user/auth');
             const {user} = response.data;
-            console.log('Valid User');
             fetchUser(user);
           } catch (error) {
             setlogoutUser();
