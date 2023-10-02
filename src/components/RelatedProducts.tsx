@@ -5,9 +5,8 @@ import {MdOutlineArrowBackIos,MdOutlineArrowForwardIos} from 'react-icons/md';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import { useRelatedProducts } from '../hooks';
-import { useProductStore } from '../store/productStore';
 import { useAllProducts } from '../api/useFetchProducts';
+import { ProductItemType } from '../types';
 
 type PropType = {
     category: string;
@@ -16,30 +15,30 @@ const RelatedProducts = ({category}:PropType) => {
     const sliderRef = useRef<Slider | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [numberOfSlides, setNumberOfSlides] = useState(6);
-    const { products,setProducts } = useProductStore();
-    const relatedProducts =  useRelatedProducts(products, category);
-    const {allProducts, isLoading,isError} =useAllProducts();
+    const {allProducts=[], isLoading,isError} = useAllProducts();
+    const [relatedProducts, setRelatedProducts] = useState<ProductItemType[]|[]>([]);
     const currentWindowWidth = window.innerWidth;
 
     useEffect(()=>{
         setScreenWidth(currentWindowWidth);
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
-        if(screenWidth < 1024){
+        if(screenWidth < 400){
             setNumberOfSlides(3);
         }
-        else{
-            setNumberOfSlides(6);
+        else if(screenWidth < 1024){
+            setNumberOfSlides(4);
         }
-        console.log(screenWidth);
+        else if(screenWidth >=1024){
+            setNumberOfSlides(5);
+        }
         //eslint-disable-next-line
     },[currentWindowWidth]);
 
     useEffect(()=>{
-    if(products.length === 0){
-    setProducts(allProducts);
-    }
+        const filteredData = allProducts.filter((item:ProductItemType) => item.category === category);
+        setRelatedProducts(filteredData);
     //eslint-disable-next-line
-    },[allProducts]);
+    },[isLoading]);
 
 const settings = {
     dots: true,
@@ -47,7 +46,7 @@ const settings = {
     speed: 1000,
     slidesToShow: numberOfSlides,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
     pauseOnHover: true, //will pause when the container is hover
 };
@@ -84,26 +83,26 @@ return (
     <SectionTitle title='related products'/>
   
 
-    <div className="relative bg-slate-200 p-4">
-    {/* PREVIOUOS BUTTON */}
-    <div className='w-full'>
-        <button className='absolute left-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-3xl lg:text-6xl' onClick={handlePrevious}><MdOutlineArrowBackIos /></button>
-        {/* NEXT BUTTON */}
-        <button className='absolute right-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-3xl lg:text-6xl' onClick={handleNext}><MdOutlineArrowForwardIos /></button>
-    </div>
+    <div className="relative bg-slate-200 px-1 py-4 lg:p-4">
+        {/* PREVIOUOS BUTTON */}
+        <div className='w-full'>
+            <button className='absolute left-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-3xl lg:text-6xl' onClick={handlePrevious}><MdOutlineArrowBackIos /></button>
+            {/* NEXT BUTTON */}
+            <button className='absolute right-0 top-1/2 -translate-y-1/2 z-10 text-gray-400 opacity-30 hover:text-gray-100 hover:opacity-70 duration-300 text-3xl lg:text-6xl' onClick={handleNext}><MdOutlineArrowForwardIos /></button>
+        </div>
 
-    <Slider ref={sliderRef} {...settings}>
-    {relatedProducts.map((product)=>{
-            //   const{ _id, category, description, image, name, price, rating, stock, } = product;
-                return (
-                    <div key={product._id} className="h-10 px-1 bg-blue-700'">
+            <Slider ref={sliderRef} {...settings}>
+        
+            {relatedProducts.map((product)=>{
+                        return (
+                            <div key={product._id} className="p-1">
 
-                        <RelatedProduct key={product._id} item={product}/>
-                    </div>
-                    )
-                })}
-    </Slider>
-    
+                                <RelatedProduct key={product._id} item={product}/>
+                            </div>
+                            )
+                        })}
+            </Slider>
+        
     </div>
 </section>
 )
