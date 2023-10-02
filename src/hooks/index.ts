@@ -3,8 +3,7 @@ import useCurrentPath from './useCurrentPath';
 import useFeaturedProducts from './useFeaturedProducts';
 import useFormatPrice from './useFormatPrice';
 import usePasswordToggle from './usePasswordToggle';
-import useRelatedProducts from './useRelatedProducts';
 
 
 
-export { usePasswordToggle, useConfirmPasswordToggle, useFormatPrice, useFeaturedProducts, useCurrentPath, useRelatedProducts};
+export { usePasswordToggle, useConfirmPasswordToggle, useFormatPrice, useFeaturedProducts, useCurrentPath};
