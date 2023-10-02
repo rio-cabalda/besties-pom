@@ -10,6 +10,7 @@ import axiosPrivate from "../api/useAxiosConfig";
 import { AxiosError } from "axios";
 import useCheckAuthUser from "../api/checkAuthUser";
 import useAuthStore from "../store/authStore";
+import CustomerComment from "../components/CustomerComment";
 
 const SingleProduct = () => {
   const navigate = useNavigate();
@@ -41,9 +42,8 @@ const SingleProduct = () => {
   const addToCart = async() => {
     setIsSubmitting(true);
     try {
-      const addItem = await axiosPrivate.post(`/user/cart/${_id}1`,{quantity:quantity});
+      const addItem = await axiosPrivate.post(`/user/cart/${_id}`,{quantity:quantity});
       console.log(addItem);
-      
       setIsSubmitting(false);
     } catch (error) {
       const axiosError = error as AxiosError;
@@ -122,7 +122,7 @@ if(isError){
 
       
       <RelatedProducts category={category}/>
-      
+      <CustomerComment id={_id} category={category} productName={name}/>
 
     </div>
   )
