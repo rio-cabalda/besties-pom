@@ -71,7 +71,8 @@ body{
         #ffb900, #ff7730); 
     }
  /*-----end--- Service Card Custom style ----- */
- }
+}
+
 /* Slick Libary CSS */
 .slick-arrow {
     display: none !important;
@@ -88,6 +89,4 @@ body{
     font-size: 0.7rem;
 }
 
-.slick-list {
-    background: red!;
-}
+
