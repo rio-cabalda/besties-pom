@@ -5,6 +5,8 @@ import useAuthStore from '../store/authStore';
 import { CustomerRating } from '.';
 import { UserType } from '../types';
 import { useNavigate, useLocation } from "react-router-dom"
+import StarRating from './StarRating';
+import toast from 'react-hot-toast';
 
 type AuthType = {
     user: UserType;
@@ -37,25 +39,30 @@ const CustomerComment = ({id, category, productName}:PropType) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [commentList, setCommentList] = useState<FetchedCommentType[] | []>(getComment(id));
     const [addComment, setAddComment] = useState<string>('');
+    const [rating, setRating] = useState<number>(0);
+    const [hoveredRating, setHoveredRating] = useState<number>(0);
+// 
     const {user,isAuthenticated}= useAuthStore() as AuthType;
     const navigate = useNavigate();
     const location = useLocation();
     const currentLocation = location.pathname;
-    
-    // console.log(addComment);
-    // console.log(user);
 
+    console.log('single product id',id);
+    //  console.log('comment',getComment(id));
+    // console.log(user);
+    
     const handleSubmit = (e:FormEvent) =>{
         e.preventDefault();
-        if(addComment === ''){
-            alert('Please input a comment')
+        if(addComment === '' || rating === 0){
+            setAddComment('');
+            toast.error('Please select star and write a comment before submitting.',{duration: 4000});
         }else{
             const newComment: FetchedCommentType = {
                 user: {
                     email:user.email,
                     image: user.image,
                 },
-                rating:4.5,
+                rating,
                 comment: addComment
             }
             console.log('add comment',newComment);
@@ -66,10 +73,12 @@ const CustomerComment = ({id, category, productName}:PropType) => {
                 setCommentList(existingArray);
                 }else {
                     localStorage.setItem(id, JSON.stringify(newComment));
-                }
-           
+                }  
+                toast.success('Thank you for your review. Happy shopping.',{duration: 4000});    
         }
-        setAddComment('');  
+        setAddComment('');
+        setRating(0);
+        setHoveredRating(0);
     }
     
     useEffect(()=>{
@@ -83,6 +92,8 @@ const CustomerComment = ({id, category, productName}:PropType) => {
                     setCommentList(fetchedComment);
                     localStorage.setItem(id, JSON.stringify(fetchedComment));
                     
+                }else{
+                    setCommentList(getComment(id));
                 }
             } catch (error) {
                 const axiosError = error as AxiosError;
@@ -92,8 +103,8 @@ const CustomerComment = ({id, category, productName}:PropType) => {
             }
         }
         fetchComment();
-        //eslint-disable-next-line
-    },[commentList]);
+        
+    },[id,commentList.length]);
 
     // console.log(isLoading);
     if(isLoading){
@@ -105,12 +116,13 @@ const CustomerComment = ({id, category, productName}:PropType) => {
 
 return (
     <div className='max-w-screen-lg mx-auto lg:w-[50rem] bg-slate-100 p-2 md:p-4 mt-5 rounded-md'>
-        <div className='flex justify-center items-center'>
-            {isAuthenticated? 
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="addComment" id="addComment" onChange={(e)=>setAddComment(e.target.value)} placeholder='Add comment'/>
-                <button type='submit'>Add comment</button>
-            </form>
+        <div className='flex justify-center items-center gap-5'>
+            {isAuthenticated? <>
+            <StarRating rating={rating} hoveredRating={hoveredRating} setRating={setRating} setHoveredRating={setHoveredRating} />
+            <form onSubmit={handleSubmit} className='flex items-center justify-center gap-4'>
+                <input className='py-1 px-2 rounded-md focus:outline-none' value={addComment} type="text" name="addComment" id="addComment" onChange={(e)=>setAddComment(e.target.value)} placeholder='Add comment'/>
+                <button className='py-1 px-2 bg-green-400 rounded-md' type='submit'>Add comment</button>
+            </form></>
             :
             <button onClick={()=>navigate('/signin', { state: { from: currentLocation } })} className='uppercase px-2 py-1 rounded-lg bg-sky-400 text-slate-100 hover:bg-sky-600 hover:text-slate-200'>Please Sign in to add comment</button>
             }

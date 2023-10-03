@@ -38,6 +38,7 @@ const SingleProduct = () => {
   const currentLocation = location.pathname;
 
 
+
  
   const addToCart = async() => {
     setIsSubmitting(true);
