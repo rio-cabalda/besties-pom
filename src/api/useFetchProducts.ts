@@ -24,7 +24,7 @@ export const useAllProducts = () => {
 };
 
  export const useSingleProduct = (id:string) => {
-    const {data:singleProduct, isLoading, isError} = useQuery('singleProduct', async()=>{
+    const {data:singleProduct, isLoading, isError} = useQuery(['singleProduct',id], async()=>{
         try {
           const response = await axiosInstance(`/product/${id}`);
           const { product } = response.data;

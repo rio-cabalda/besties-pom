@@ -30,12 +30,21 @@ const SingleProduct = () => {
   const {id=''} = useParams();
   const {singleProduct=defaultSingleProduct, isLoading, isError}:SingleProductType = useSingleProduct(id);
   const { _id,name, image, description, category, price, rating, stock} = singleProduct;
+  // const [] = useState();
+  // const [isLoading] = useState();
+  // const [] = useState();
   const {isAuthenticated,setlogoutUser} = useAuthStore();
   const formatedPrice = useFormatPrice(price);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const checkUser = useCheckAuthUser();
   const currentLocation = location.pathname;
+
+
+  useEffect(()=>{checkUser},
+  //eslint-disable-next-line
+  []);
+  
 
   const addToCart = async() => {
     setIsSubmitting(true);
@@ -56,10 +65,6 @@ const SingleProduct = () => {
       setIsSubmitting(false);
     }
   }
-
-  useEffect(()=>{checkUser},
-  //eslint-disable-next-line
-  []);
   
   if(isLoading){
     return (

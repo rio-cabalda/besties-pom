@@ -25,15 +25,15 @@ export type SingleProductType = {
    singleProduct: ProductItemType;
    isLoading: boolean;
    isError: boolean;
- }
+}
 export enum SortOption {
    PriceLowest = 'price-lowest',
    PriceHighest = 'price-highest',
    NameA_Z = 'name-a',
    NameZ_A = 'name-z',
- }
+}
 
- export type ProductStoreType = {
+export type ProductStoreType = {
    products: ProductItemType[]; 
    showedProducts: ProductItemType[];
    category: string[];

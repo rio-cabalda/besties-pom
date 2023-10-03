@@ -29,6 +29,9 @@ const RelatedProducts = ({category}:PropType) => {
             setNumberOfSlides(4);
         }
         else if(screenWidth >=1024){
+            setNumberOfSlides(4);
+        }
+        else if(screenWidth >=1280){
             setNumberOfSlides(5);
         }
         //eslint-disable-next-line
