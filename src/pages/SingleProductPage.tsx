@@ -37,9 +37,6 @@ const SingleProduct = () => {
   const checkUser = useCheckAuthUser();
   const currentLocation = location.pathname;
 
-
-
- 
   const addToCart = async() => {
     setIsSubmitting(true);
     try {

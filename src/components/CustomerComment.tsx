@@ -116,7 +116,7 @@ const CustomerComment = ({id, category, productName}:PropType) => {
 
 return (
     <div className='max-w-screen-lg mx-auto lg:w-[50rem] bg-slate-100 p-2 md:p-4 mt-5 rounded-md'>
-        <div className='flex justify-center items-center gap-5'>
+        <div className='flex justify-center items-center gap-2 lg:gap-5'>
             {isAuthenticated? <>
             <StarRating rating={rating} hoveredRating={hoveredRating} setRating={setRating} setHoveredRating={setHoveredRating} />
             <form onSubmit={handleSubmit} className='flex items-center justify-center gap-4'>

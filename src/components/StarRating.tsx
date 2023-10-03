@@ -29,7 +29,7 @@ return (
     return (
         <div
         key={starValue}
-        className={`cursor-pointer md:text-xl lg:text-2xl ${
+        className={`cursor-pointer text-xl lg:text-2xl ${
             isSelected ? 'text-yellow-500' : 'text-gray-300'
         } ${isHovered ? 'hover:text-yellow-500' : ''}`}
         onMouseEnter={() => handleStarHover(starValue)}
