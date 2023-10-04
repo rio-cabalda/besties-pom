@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import { TbDogBowl } from 'react-icons/tb';
 import { BiSolidHide, BiShow } from 'react-icons/bi';
 import {usePasswordToggle, useConfirmPasswordToggle} from '../../hooks';
@@ -28,6 +29,18 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema)
   });
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // Smooth scrolling animation
+        });
+      };
+    scrollToTop();
+  },
+  //eslint-disable-next-line
+  []);
 
   const onSubmit = async(data: TSignUpSchema) =>{
     const response = await axiosInstance.post('/user/register', data);
