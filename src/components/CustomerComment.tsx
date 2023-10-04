@@ -133,9 +133,9 @@ return (
             const keyId = singleComment.user.email+index;
             const { user, rating, comment } = singleComment;
             return (
-            <div key={keyId} className='flex gap-4 sm:gap-8 md:gap-10 p-4 border-b-2 border-slate-200'>
+            <div key={keyId} className='flex gap-4 items-center sm:gap-8 md:gap-10 p-4 border-b-2 border-slate-200'>
             {/* First Child Div */}
-            <div className='w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden'>
+            <div className='w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden'>
             <img className='w-full h-full object-cover' src={user.image} alt={user.image} />
             <p>{user.image}</p>
             </div>
