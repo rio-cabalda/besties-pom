@@ -30,6 +30,8 @@ const Navbar = () => {
     // eslint-disable-next-line
   }, [pathname]);
 
+
+
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
     <header ref={navRef} className='w-full bg-white shadow-sm fixed top-0 left-0 z-30'>
@@ -47,7 +49,6 @@ const Navbar = () => {
               </h1>
             </Link>
           </div>
-     
 
         {/* search input */}
         <div className='bg-gray-200 px-2 ml-4 flex items-center flex-1 md:mx-6 rounded-full max-w-lg'>
@@ -75,7 +76,7 @@ const Navbar = () => {
         {sidebarOpen ? <div className='bg-black/80 fixed w-full h-screen z-40 top-0 left-0' onClick={()=>setSidebarOpen(!sidebarOpen)}></div> : null}
 
         {/* Sidebar menu */}
-         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} navLink={navLink} />
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} navLink={navLink} />
         </nav>
     </header>
   )
