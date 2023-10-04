@@ -30,10 +30,6 @@ const Navbar = () => {
     // eslint-disable-next-line
   }, [pathname]);
 
- 
-
-
-  
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
     <header ref={navRef} className='w-full bg-white shadow-sm fixed top-0 left-0 z-30'>

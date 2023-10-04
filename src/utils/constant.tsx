@@ -1,46 +1,31 @@
 
 import {MenuItemType, navLinkType} from '../types';
-import { ImHome } from 'react-icons/im';
-import {FaBoxOpen, FaShoppingCart, FaUserPlus, FaInfoCircle} from 'react-icons/fa';
-import { MdLogin } from 'react-icons/md';
+
+import {PiDropboxLogoLight} from 'react-icons/pi';
+import {HiOutlineInformationCircle, HiOutlineHome} from 'react-icons/hi2';
+// import {FaShoppingCart, FaUserPlus } from 'react-icons/fa';
+// import { MdLogin } from 'react-icons/md';
 
 export const sidebarLinks:MenuItemType[] = [
     {
         id: 1,
         title: 'Home',
-        icon: <ImHome />,
+        icon: <HiOutlineHome />,
         link: '/'
     },
     {
         id: 2,
         title: 'About',
-        icon: <FaInfoCircle />,
+        icon: <HiOutlineInformationCircle />,
         link: '/about'
     },
     {
         id: 3,
         title: 'Products',
-        icon: <FaBoxOpen />,
+        icon: <PiDropboxLogoLight />,
         link: '/products'
     },
-    {
-        id: 4,
-        title: 'Cart',
-        icon: <FaShoppingCart />,
-        link: '/cart'
-    },
-    {
-        id: 5,
-        title: 'Sign in',
-        icon: <MdLogin />,
-        link: '/signin'
-    },
-    {
-        id: 6,
-        title: 'Sign up',
-        icon: <FaUserPlus />,
-        link: '/signup'
-    },
+
 ]
 
 export const navLinks: navLinkType[] = [
