@@ -53,13 +53,13 @@ const Sidebar = ({sidebarOpen,setSidebarOpen, navLink}:SidebarType) => {
         {isAuthenticated ? 
         <div className='w-full '>
             <div className='relative w-1/2 h-40 bg-blue-600 rounded-tr-3xl rounded-br-3xl'>
-                <div className='absolute top-1/2 -right-1/2 -translate-y-1/2 flex gap-1 flex-col  justify-center items-center'>
+                <div className='absolute top-1/2 -right-1/2 translate-x-[9px] -translate-y-1/2 flex gap-1 flex-col  justify-center items-center'>
                 <div className=' w-24 h-24 rounded-full bg-white flex justify-center items-center '>
                     <div className='w-[88px] h-[88px] rounded-full bg-sky-100 overflow-hidden'>
                         <img className='w-full h-full object-cover' src={user?.image} alt={user?.firstname} />
                     </div>
                 </div>    
-                    <span className='bg-green-300 text-slate-700  py-1 px-2 rounded-lg'>{user?.email}</span>
+                    <span className='bg-green-200/95 text-slate-900  py-1 px-2 rounded-lg'>{user?.email}</span>
                 </div>
                 
             </div>
