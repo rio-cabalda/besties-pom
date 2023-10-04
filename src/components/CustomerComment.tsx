@@ -118,8 +118,9 @@ return (
     <div className='max-w-screen-lg mx-auto lg:w-[50rem] bg-slate-100 p-2 md:p-4 mt-5 rounded-md'>
         <div className='flex justify-center items-center gap-2 lg:gap-5'>
             {isAuthenticated? <>
-            <StarRating rating={rating} hoveredRating={hoveredRating} setRating={setRating} setHoveredRating={setHoveredRating} />
-            <form onSubmit={handleSubmit} className='flex items-center justify-center gap-4'>
+            
+            <form onSubmit={handleSubmit} className='flex flex-wrap items-center justify-center gap-4 border-b-2 py-5'>
+                <StarRating rating={rating} hoveredRating={hoveredRating} setRating={setRating} setHoveredRating={setHoveredRating} />
                 <input className='py-1 px-2 rounded-md focus:outline-none' value={addComment} type="text" name="addComment" id="addComment" onChange={(e)=>setAddComment(e.target.value)} placeholder='Add comment'/>
                 <button className='py-1 px-2 bg-green-400 rounded-md' type='submit'>Add comment</button>
             </form></>
