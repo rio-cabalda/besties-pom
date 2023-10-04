@@ -71,6 +71,11 @@ body{
         #ffb900, #ff7730); 
     }
  /*-----end--- Service Card Custom style ----- */
+ /* ------Custom Clip Path -------------- */
+ .custom-clip-path {
+    clip-path: polygon(91% 0, 95% 13%, 100% 13%, 100% 100%, 0 100%, 0 13%, 70% 13%);
+    overflow: hidden; 
+ }
 }
 
 /* Slick Libary CSS */
