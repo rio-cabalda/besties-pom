@@ -27,22 +27,18 @@ const Sidebar = ({sidebarOpen,setSidebarOpen, navLink}:SidebarType) => {
     const logoutUser = async() =>{
         setLoggingOut(true);
         try {
-          await axiosPrivate.post('/user/logout');
-          setlogoutUser();
-          setLoggingOut(false);
-          
+            await axiosPrivate.post('/user/logout');
+            setlogoutUser();
         } catch (error) {
-          const axiosError = error as AxiosError;
-          setLoggingOut(false);
-          throw new Error(axiosError.message);
+            const axiosError = error as AxiosError;
+            throw new Error(axiosError.message);
         }finally{
-            setLoggingOut(true);
+            setLoggingOut(false);
             setSidebarOpen(!sidebarOpen);
         }
     }
 
-   
-  return (
+return (
     <div className={sidebarOpen? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-50  duration-300': 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-50  duration-300'}>
         <AiOutlineClose size={30} onClick={()=>setSidebarOpen(!sidebarOpen)}  className='absolute right-4 top-4 cursor-pointer hover:text-red-600 transition-colors duration-300'/>
         <h2 className='text-2xl p-4'>
@@ -53,7 +49,7 @@ const Sidebar = ({sidebarOpen,setSidebarOpen, navLink}:SidebarType) => {
         {isAuthenticated ? 
         <div className='w-full '>
             <div className='relative w-1/2 h-40 bg-blue-600 rounded-tr-3xl rounded-br-3xl'>
-                <div className='absolute top-1/2 -right-1/2 translate-x-[9px] -translate-y-1/2 flex gap-1 flex-col  justify-center items-center'>
+                <div className='absolute top-1/2 -right-1/2 -translate-y-1/2 flex gap-1 flex-col  justify-center items-center'>
                 <div className=' w-24 h-24 rounded-full bg-white flex justify-center items-center '>
                     <div className='w-[88px] h-[88px] rounded-full bg-sky-100 overflow-hidden'>
                         <img className='w-full h-full object-cover' src={user?.image} alt={user?.firstname} />
