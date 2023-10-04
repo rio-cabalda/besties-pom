@@ -24,7 +24,16 @@ const SignInPage = () => {
   const from = location.state?.from || '/';
   console.log(location);
 
-  useEffect(()=>{checkUser},
+  useEffect(()=>{
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // Smooth scrolling animation
+        });
+      };
+    scrollToTop(); 
+    checkUser //Check user if has logged in.
+  },
   //eslint-disable-next-line
   []);
 
