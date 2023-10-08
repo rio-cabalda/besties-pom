@@ -1,14 +1,14 @@
 import { useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Product, SectionTitle } from ".";
-import { useAllProducts } from "../api/useFetchProducts";
+import { useAllProducts } from "../api/fetchProducts";
 import { ProductItemType } from "../types";
 import {useFeaturedProducts} from '../hooks';
 
 const FeaturedProducts = () => {
   const [featuredProducts,setFeaturedProducts] = useState<ProductItemType[] | []>([]);
   const { allProducts=[], isLoading, isError } = useAllProducts();
- const featured = useFeaturedProducts(allProducts,4);
+ const featured = useFeaturedProducts(allProducts, 4);
 
   useEffect(()=>{
   if(allProducts){
