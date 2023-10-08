@@ -16,7 +16,6 @@ setHoveredRating(starValue);
 const handleStarClick = (starValue: number) => {
 setRating(starValue);
 };
-console.log(hoveredRating);
 
 return (
 <div className="flex">
