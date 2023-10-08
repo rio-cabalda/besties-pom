@@ -2,17 +2,20 @@
 import { BsBag } from 'react-icons/bs';
 import useAuthStore from '../store/authStore';
 import checkAuthUser from '../api/checkAuthUser';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import axiosPrivate from '../api/useAxiosConfig';
+import axiosPrivate from '../api/axiosConfig';
 
 const NavCart = () => {
   const checkUser = checkAuthUser();
   const {user, isAuthenticated, setlogoutUser} = useAuthStore();
   const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
   const [loggingOut, setLoggingOut] = useState<boolean>(false);
-
-  useEffect(()=>{checkUser}
+  const navigate = useNavigate();
+  useEffect(()=>{
+    checkUser
+    setUserMenuOpen(false);
+  }
    // eslint-disable-next-line
   ,[]);
   
@@ -21,6 +24,7 @@ const NavCart = () => {
     try {
       await axiosPrivate.post('/user/logout');
       setlogoutUser();
+      navigate('/');
     } catch (error) {
       const axiosError = error as AxiosError;
       throw new Error(axiosError.message);
@@ -35,7 +39,7 @@ const NavCart = () => {
         {isAuthenticated ? 
             <div className='relative pl-2 flex items-center gap-5'>
               <div className='hidden md:block'>
-                <Link to='cart' className='relative flex justify-center items-center text-xl'>
+                <Link to={`cart/${user?._id}`} className='relative flex justify-center items-center text-xl'>
                   <BsBag />
                   <span className='absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
                 </Link>
