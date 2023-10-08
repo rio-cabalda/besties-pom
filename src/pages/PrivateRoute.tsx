@@ -1,18 +1,18 @@
 import React from 'react';
-// import { isAuthenticated } from "../services/authService";
-import { RouteProps } from 'react-router-dom';
+import { RouteProps, Navigate } from 'react-router-dom';
+import useAuthStore from '../store/authStore';
 
-type ProtectedRouteProps =  RouteProps & {
+type PrivateRouteProps =  RouteProps & {
     children: React.ReactNode; // Explicitly specify the type
   }
 
-const PrivateRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-
-// if (!isAuthenticated()) {
-//     // User is not authenticated, navigate to the login page
-//     return <Navigate to='/signin' />
-//   }
-   return children;
- }
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+  const {isAuthenticated} = useAuthStore();
+if (!isAuthenticated) {
+    // User is not authenticated, navigate to the login page
+    return <Navigate to='/' />
+  }
+  return children;
+}
 
 export default PrivateRoute;
