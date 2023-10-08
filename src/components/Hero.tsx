@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import {MdOutlineArrowBackIos,MdOutlineArrowForwardIos} from 'react-icons/md';
-import { heroCarousel } from '../utils/carouselData';
+import { heroCarousel } from '../data/carouselData';
 import { Link } from 'react-router-dom';
 
 
