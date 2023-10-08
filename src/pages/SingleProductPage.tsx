@@ -1,12 +1,12 @@
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom"
-import { useSingleProduct } from "../api/useFetchProducts";
+import { useSingleProduct } from "../api/fetchProducts";
 import errorImage from '../assets/sad_dog.png';
 import product from '../assets/product.png';
 import { useFormatPrice } from "../hooks";
 import { SingleProductType } from "../types";
 import {AddToCart, RelatedProducts, CustomerRating} from "../components";
 import { useEffect, useState } from "react";
-import axiosPrivate from "../api/useAxiosConfig";
+import axiosPrivate from "../api/axiosConfig";
 import { AxiosError } from "axios";
 import useCheckAuthUser from "../api/checkAuthUser";
 import useAuthStore from "../store/authStore";
@@ -49,10 +49,11 @@ const SingleProduct = () => {
         });
       };
     scrollToTop();
+    setQuantity(1);
     checkUser //Check user if has logged in.
   },
   //eslint-disable-next-line
-  []);
+  [id]);
   
 
   const addToCart = async() => {
@@ -77,7 +78,7 @@ const SingleProduct = () => {
   
   if(isLoading){
     return (
-        <section className='max-w-screen-xl mx-auto flex flex-col justify-between items-center'>
+        <section className='flex flex-col justify-between items-center'>
             <div className="w-16 h-16 mt-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
         </section>)}
 if(isError){
