@@ -1,6 +1,6 @@
 import {useRef, useEffect} from 'react'
 import { SectionTitle } from ".";
-import { services } from "../utils/constant";
+import { services } from "../data/constant";
 import ServicesCard from "./ServicesCard";
 import videoBg from '../assets/videoBg.mp4';
 
