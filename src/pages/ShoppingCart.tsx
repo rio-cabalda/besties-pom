@@ -75,9 +75,9 @@ const ShoppingCart = () => {
 
           {/* this will contain total about and checkout button */}
           <article className="bg-white h-fit rounded-xl shadow-lg min-w-[100px] w-80">
-            <h4 className="text-sm md:text-2xl text-slate-900 font-semibold px-4 py-2">Summary</h4>
+            <h4 className="text-base lg:text-xl text-slate-900 font-semibold px-4 py-2">Summary</h4>
             <hr/>
-            <div className="text-sm md:text-lg p-4 w-full flex flex-col justify-stretch text-slate-800">
+            <div className="text-sm lg:text-base p-4 w-full flex flex-col justify-stretch text-slate-800">
               <div className="flex justify-between py-1 md:py-2">
                 <span>Products</span><span>{formatPrice(totalPrice)}</span>
               </div>
@@ -85,11 +85,11 @@ const ShoppingCart = () => {
                 <span>Shipping</span><span>{formatPrice(shippingFee)}</span>
               </div>
               <hr />
-              <div className="py-2 font-bold flex gap-5 justify-between text-sm md:text-lg">
+              <div className="py-2 font-bold flex gap-5 justify-between text-sm lg:text-base">
                 <h5>Total amount<br />(including VAT)</h5>
                 <span>{formatPrice(totalAmount)}</span>
               </div>
-              <button disabled={cartItems.length<1} className="px-4 py-2 mt-2 bg-blue-500 rounded-lg text-slate-50 text-lg font-semibold uppercase hover:bg-blue-700 active:bg-blue-500 disabled:bg-blue-950">Go to Checkout</button>
+              <button disabled={cartItems.length<1} className="px-4 py-2 mt-2 bg-blue-500 rounded-lg text-slate-50 text-sm lg:text-base font-semibold uppercase hover:bg-blue-700 active:bg-blue-500 disabled:bg-blue-950">Go to Checkout</button>
             </div>
           </article>
 

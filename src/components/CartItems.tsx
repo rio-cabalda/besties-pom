@@ -11,7 +11,7 @@ const CartItems = ({cartItems, isLoading}:UserCartType) => {
     return (
     <article className="flex-grow bg-white rounded-xl shadow-lg">
         <table className="w-full table-auto border-collapse mb-10">
-            <thead className="text-sm md:text-xl capitalize font-semibold text-slate-800">
+            <thead className="text-base lg:text-xl capitalize font-semibold text-slate-800">
                 <tr className="border-b-2 border-slate-100">
                 <th className="w-1/4 py-4">Item</th>
                 <th className="w-1/4 py-4">Price</th>
@@ -47,12 +47,12 @@ const CartItems = ({cartItems, isLoading}:UserCartType) => {
                             const {quantity, _id:id} = item;
                             return (
                             <>
-                                <tr key={id} className="text-center text-sm md:text-xl">
+                                <tr key={id} className="text-center text-sm lg:text-base">
                                     <td className="px-4 py-2 flex gap-2 items-center">
-                                    <div className="w-28 h-24">
+                                    <div className="w-24 h-20 lg:w-28 lg:h-24">
                                         <img className='w-full h-full object-cover' src={image} alt={item.product.name} />  
                                     </div>
-                                    <h5 className="text-lg">{name}</h5>
+                                    <h5 className="">{name}</h5>
                                     </td>
                                     <td className="px-4 py-2">{formatPrice(price)}</td>
                                     <td className="px-4 py-2">{quantity}</td>
