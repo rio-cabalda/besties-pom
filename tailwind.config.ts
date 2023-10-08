@@ -20,8 +20,21 @@ export default {
           transform: 'rotate(-5deg)'
         },
       },
+      bounce: {
+        "0%": {
+          transform: 'translateY(-5deg)'
+        },
+        "50%": {
+          transform:' translateY(5deg)'
+        },
+        "100%": {
+          transform: 'translateY(-5deg)'
+        },
+      },
+
       animation: {
         wiggle: 'wiggleFrame 1s ease-in-out infinite',
+        bouncingText: 'bounce 1s ease-in-out infinite'
         },
     },
     
