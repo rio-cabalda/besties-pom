@@ -14,7 +14,7 @@ const HomePage = () => {
   },[]);
  
   return (
-    <div className='max-w-screen-xl mx-auto flex flex-col'>
+    <div className='flex flex-col'>
       <Hero/>
       <FeaturedProducts />
       <Services />
