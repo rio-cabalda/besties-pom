@@ -4,7 +4,7 @@
 
 @layer utilities {
 body{
-    background-color: white;
+    background-color: #fafafa;
 }
 
     .clip-polygon {
@@ -76,6 +76,10 @@ body{
     clip-path: polygon(91% 0, 95% 13%, 100% 13%, 100% 100%, 0 100%, 0 13%, 70% 13%);
     overflow: hidden; 
  }
+ .button:focus,
+.button:active {
+  background-color: transparent !important;
+}
 }
 
 /* Slick Libary CSS */
