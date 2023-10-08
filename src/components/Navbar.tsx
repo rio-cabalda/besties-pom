@@ -1,7 +1,7 @@
 import {useState, useRef, useEffect} from 'react';
 import { AiOutlineMenu} from 'react-icons/ai';
 import { Link, useLocation } from 'react-router-dom';
-import { navLinks } from '../utils/constant';
+import { navLinks } from '../data/constant';
 import logo from '../assets/logo-192px.png';
 import {SearchBar, Sidebar} from '.';
 import { useProductStore } from '../store/productStore';
