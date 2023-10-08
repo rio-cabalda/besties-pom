@@ -1,11 +1,11 @@
-import { sidebarLinks } from '../utils/constant';
+import { sidebarLinks } from '../data/constant';
 import { AiOutlineClose } from 'react-icons/ai';
 import {MenuItemType} from '../types';
 import { Link } from 'react-router-dom';
 import {IoLogOutOutline} from 'react-icons/io5';
 import {BsCart3} from 'react-icons/bs';
 import useAuthStore from '../store/authStore';
-import axiosPrivate from '../api/useAxiosConfig';
+import axiosPrivate from '../api/axiosConfig';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import useCheckAuthUser from '../api/checkAuthUser';
@@ -48,10 +48,10 @@ return (
         {/* logged in user section */}
         {isAuthenticated ? 
         <div className='w-full '>
-            <div className='relative w-1/2 h-40 bg-blue-600 rounded-tr-3xl rounded-br-3xl'>
-                <div className='absolute top-1/2 -right-1/2 -translate-y-1/2 flex gap-1 flex-col  justify-center items-center'>
-                <div className=' w-24 h-24 rounded-full bg-white flex justify-center items-center '>
-                    <div className='w-[88px] h-[88px] rounded-full bg-sky-100 overflow-hidden'>
+            <div className='w-1/2 py-3 bg-blue-600 rounded-tr-3xl rounded-br-3xl'>
+                <div className='translate-x-1/2 flex gap-2 md:gap-1 flex-col  justify-center items-center'>
+                <div className='w-16 h-16 md:w-[72px] md:h-[72px] rounded-full bg-white flex justify-center items-center '>
+                    <div className='w-14 h-14 md:w-16 md:h-16 rounded-full bg-sky-100 overflow-hidden'>
                         <img className='w-full h-full object-cover' src={user?.image} alt={user?.firstname} />
                     </div>
                 </div>    
@@ -76,7 +76,7 @@ return (
             {isAuthenticated? 
             <>  
                 <li className={`${navLink === 'cart' ? 'bg-sky-500 bg-opacity-60': 'hover:bg-sky-400 hover:bg-opacity-60'}`}>
-                    <Link  to={'/cart'}  onClick={()=>setSidebarOpen(!sidebarOpen)} className={`w-full text-xl p-4 flex gap-3 justify-start items-center transform duration-300 cursor-pointer ${navLink === 'cart' ? 'translate-x-2' : 'hover:translate-x-2'}`}>
+                    <Link to={`cart/${user?._id}`}  onClick={()=>setSidebarOpen(!sidebarOpen)} className={`w-full text-xl p-4 flex gap-3 justify-start items-center transform duration-300 cursor-pointer ${navLink === 'cart' ? 'translate-x-2' : 'hover:translate-x-2'}`}>
                         <span className='text-2xl md:text-[31px]'><BsCart3/></span>
                         <span className='text-base capitalize'>cart</span>
                     </Link> 
