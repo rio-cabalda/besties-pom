@@ -5,7 +5,7 @@ import {MdOutlineArrowBackIos,MdOutlineArrowForwardIos} from 'react-icons/md';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import { useAllProducts } from '../api/useFetchProducts';
+import { useAllProducts } from '../api/fetchProducts';
 import { ProductItemType } from '../types';
 
 type PropType = {
