@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { axiosInstance } from '../api/useAxiosConfig'
+import { axiosInstance } from '../api/axiosConfig'
 import { AxiosError } from 'axios'
 import useAuthStore from '../store/authStore';
 import { CustomerRating } from '.';
@@ -46,10 +46,6 @@ const CustomerComment = ({id, category, productName}:PropType) => {
     const navigate = useNavigate();
     const location = useLocation();
     const currentLocation = location.pathname;
-
-    console.log('single product id',id);
-    //  console.log('comment',getComment(id));
-    // console.log(user);
     
     const handleSubmit = (e:FormEvent) =>{
         e.preventDefault();
