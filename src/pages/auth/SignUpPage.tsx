@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, TSignUpSchema } from '../../types/SignUpTypes';
 import toast  from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import {axiosInstance} from '../../api/useAxiosConfig';
+import {axiosInstance} from '../../api/axiosConfig';
 
 export type UserType = {
   firstname: string;
@@ -48,7 +48,7 @@ const SignUpPage = () => {
     if (response.status === 201) {
       // Success: HTTP status code 200
       toast.success(<b>Congratulations! Welcome to our community of pet lovers!</b>,{duration: 3000});
-       navigate('/signin');
+      navigate('/signin');
     } else {
       toast.error(<b>Could not save.</b>);
     }
@@ -60,7 +60,7 @@ const SignUpPage = () => {
   return (
     <section className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex '>
 
-      <div className='flex mx-auto max-w-[1640px] h-fit rounded-lg shadow-md'>  
+      <div className='flex mx-auto h-fit rounded-lg shadow-md'>  
 
         <div className='relative rounded-l-lg rounded-r-lg w-[350px] mobile-400:w-[400px] md:w-[500px] lg:rounded-r-none h-fit py-12 px-5 text-xs bg-white flex items-center flex-col'>
           <div className='absolute flex justify-center items-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-500 h-20 w-20 border-transparent border-none rounded-full overflow-hidden'>
@@ -181,13 +181,11 @@ const SignUpPage = () => {
           </form>
         </div>
 
-        <div className='hidden w-[500px] lg:block flex-grow bg-white rounded-r-lg overflow-hidden'>
-          
-            <img className='h-full w-full object-cover ' src="https://besttopets.com/wp-content/uploads/2023/05/White-Pomeranian-Dog-5.jpg" alt="Sign up image" />
-            
+        <div className='hidden w-[500px] lg:block flex-grow bg-white rounded-r-lg overflow-hidden'> 
+            <img className='h-full w-full object-cover' src="https://besttopets.com/wp-content/uploads/2023/05/White-Pomeranian-Dog-5.jpg" alt="Sign up image" />
         </div>
       </div>
-   </section>
+  </section>
   )
 }
 
