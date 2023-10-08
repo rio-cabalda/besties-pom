@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import axiosPrivate from "./useAxiosConfig";
+import axiosPrivate from "./axiosConfig";
 import useAuthStore from "../store/authStore";
 // import { AxiosError } from "axios";
 
-const useCheckAuthUser = async () =>{
+const useCheckAuthUser = () =>{
     const { fetchUser, setlogoutUser }=useAuthStore();
     //check if the token is available or valid;
     useEffect(()=>{
