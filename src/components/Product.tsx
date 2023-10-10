@@ -14,14 +14,14 @@ const Product:React.FC<ProductProps> = ({item}) => {
 
 
   return (
-    <div key={id} className='bg-sky-100 rounded-lg shadow-md overflow-hidden flex-grow'>
+    <div key={id} className='bg-sky-100 rounded-lg shadow-md flex-grow overflow-hidden '>
       <div className='relative group bg-white'>
           <div className='h-64 lg:h-72'>
               <img className='w-full h-full object-cover' src={image} alt={name} />
           </div>
           <Link to={`/products/${id}`}>
               <div className='absolute top-0 left-0 w-full h-full bg-black/70 flex justify-center items-center opacity-0 duration-300
-              group-hover:opacity-100 text-sky-400 text-3xl '>
+              group-hover:opacity-100 text-sky-400 text-3xl rounded-lg overflow-hidden'>
               <BiSearchAlt />
               </div>
           </Link>
