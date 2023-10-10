@@ -1,7 +1,7 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import { CartItemType } from "../pages/ShoppingCartPage";
 
