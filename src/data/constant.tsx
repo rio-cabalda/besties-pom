@@ -2,8 +2,6 @@
 import {MenuItemType, navLinkType} from '../types';
 import {PiDropboxLogoLight} from 'react-icons/pi';
 import {HiOutlineInformationCircle, HiOutlineHome} from 'react-icons/hi2';
-// import {FaShoppingCart, FaUserPlus } from 'react-icons/fa';
-// import { MdLogin } from 'react-icons/md';
 
 export const sidebarLinks:MenuItemType[] = [
     {
