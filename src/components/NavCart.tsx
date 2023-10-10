@@ -5,6 +5,7 @@ import checkAuthUser from '../api/checkAuthUser';
 import { Link, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import axiosPrivate from '../api/axiosConfig';
+import { CgCloseO } from 'react-icons/cg';
 
 const NavCart = () => {
   const checkUser = checkAuthUser();
@@ -47,11 +48,16 @@ const NavCart = () => {
               <div className='w-10 h-10 rounded-full overflow-hidden cursor-pointer' onClick={()=>setUserMenuOpen(!userMenuOpen)}>
                     <img className='w-full h-full object-cover' src={user?.image} alt={user?.firstname} />  
               </div>
-              
 
                {/* drop down user information */}
-               {userMenuOpen?
-              <div className={`w-[15rem] custom-clip-path p-4 pt-16 absolute -bottom-0 translate-y-[100%] right-0 rounded-md flex flex-col items-center bg-blue-300 text-slate-700 duration-300`}>
+              {userMenuOpen?
+              <div className={`w-[15rem] custom-clip-path p-4 pt-16 absolute -bottom-0 translate-y-[100%] right-0 rounded-md bg-blue-300 text-slate-700 duration-300`}>
+                <div className='relative flex flex-col items-center'>
+                  <button type="button" className='absolute text-black -top-3 right-0 text-xl active:text-black p-1 rounded-full hover:text-red-600 duration-200'
+                  onClick={()=>setUserMenuOpen(!userMenuOpen)}>
+                  <CgCloseO />
+                  </button>  
+
                   <div className='w-[75px] h-[75px] rounded-full flex justify-center items-center bg-white'>
                     <div className='w-16 h-16 rounded-full overflow-hidden cursor-pointer'>
                         <img className='w-full h-full object-cover' src={user?.image} alt={user?.firstname} /> 
@@ -61,14 +67,15 @@ const NavCart = () => {
                   <span className='text-sm rounded-full p-4 py-1 border-2 border-slate-600'>{user?.email}</span> 
                   <button type='button' className='w-24 h-8 flex justify-center items-center capitalize mt-5 bg-blue-700 text-slate-200 rounded-md' onClick={logoutUser}>
                     {loggingOut? 
-                    <div className="inline-block ml-2 h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-slate-500 motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    <div className="inline-block ml-2 h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] text-white  motion-reduce:animate-[spin_1.5s_linear_infinite]"
                     role="status">
                         <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
                     </div>
                     :
                     'logout'}
                     </button>
-                </div> : null}
+                </div>  
+              </div> : null}
             </div>
             :
             <div className='hidden md:inline-block'>
