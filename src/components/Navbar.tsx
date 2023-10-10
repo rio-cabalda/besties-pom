@@ -35,7 +35,7 @@ const Navbar = () => {
   return (
     // <nav className='max-w-screen-xl mx-auto flex justify-between items-center p-4 xl:px-0'>
     <header ref={navRef} className='w-full bg-white shadow-sm fixed top-0 left-0 z-30'>
-      <nav className='max-w-screen-xl mx-auto py-2 px-4 flex justify-between items-center xl:px-0'>
+      <nav className='relative max-w-screen-xl mx-auto py-2 px-4 flex justify-between items-center xl:px-0'>
         {/* left side */}
           <div className='flex items-center gap-2'>
             <button onClick={()=>setSidebarOpen(!sidebarOpen)} className='cursor-pointer mr-2'>
