@@ -3,13 +3,22 @@ import { FaSearch} from 'react-icons/fa';
 import { useProductStore } from '../store/productStore';
 import { Link } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
+import { useAllProducts } from '../api/fetchProducts';
 
 const SearchBar = () => {
   const {searchValue} =useProductStore();
     const [searchInput, setSearchInput] = useState<string>(searchValue);
     const [isInputFocused, setInputFocused] = useState(false);
-    const {showedProducts, setSearch} = useProductStore();
+    const {showedProducts, setSearch, setProducts} = useProductStore();
     const div1Ref = useRef<HTMLDivElement | null>(null);
+    const { allProducts } = useAllProducts();
+    
+    useEffect(()=>{
+        if(allProducts){
+            setProducts(allProducts);
+        }
+        // eslint-disable-next-line
+    },[allProducts]);
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -50,7 +59,7 @@ const SearchBar = () => {
     }
 
   return (
-    <div ref={div1Ref} className='relative w-full h-full px-1 justify-center flex items-center flex-1'> 
+    <div ref={div1Ref} className='w-full h-full px-1 justify-center flex items-center flex-1'> 
         <div className='text-slate-500'><FaSearch /></div>
         <input className='bg-transparent p-2 w-full focus:outline-none' 
             type="text" 
@@ -62,7 +71,7 @@ const SearchBar = () => {
             placeholder='search product' 
             autoComplete='off'
             />
-            {searchInput && isInputFocused &&  showedProducts.length > 1 ? <div className=' bg-slate-100 absolute -bottom-[12px] right-1/2 w-[95%] translate-x-1/2 translate-y-[100%] rounded-lg'>
+            {searchInput && isInputFocused &&  showedProducts.length > 1 ? <div className='w-[90%] bg-slate-100 absolute -bottom-[12px] right-1/2 md:w-[50%] translate-x-1/2 translate-y-[100%] rounded-lg'>
               <ul className='px-4 py-2 max-h-[200px] overflow-scroll'>
             
                    {showedProducts.map((item)=>{
