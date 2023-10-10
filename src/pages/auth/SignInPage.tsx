@@ -91,15 +91,18 @@ const SignInPage = () => {
 
   return (
     <section className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>
-
       <div className='flex mx-auto rounded-lg h-fit shadow-md'>  
-
         <div className='flex-none relative rounded-l-lg rounded-r-lg w-[350px] mobile-400:w-[400px] md:w-[500px] lg:rounded-r-none  py-12 px-5 text-xs bg-white flex items-center flex-col'>
+
           <div className='absolute flex justify-center items-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-500 h-20 w-20 border-transparent border-none rounded-full overflow-hidden'>
             <SiDatadog className='text-white w-14 h-14'/>
           </div>
               <h1 className='text-lg font-bold text-sky-700'>Sign in</h1>
-              
+              <div className='bg-red-400 p-4 rounded-md'>
+                <h3 className='font-bold'>Use Guest Account to login immediately</h3>
+                <p >Email: <span className='font-semibold'>guest@gmail.com</span></p>
+                <p>Password: <span className='font-semibold'>Guest@123</span></p>
+              </div>
           <form onSubmit={handleSubmit(onSubmit)} className='w-full flex pt-10 flex-col justify-center text-lg gap-2'>
 
             <div className='mt-3 relative flex flex-col'>
