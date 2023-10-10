@@ -16,13 +16,11 @@ const PaypalBtn = ({cartItems, totalAmount,clearCart}:PropType) => {
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
     const { user } = useAuthStore();
-  
-   
     
     if(error){
         console.log(`Error: ${error}`);
     }
-  return (
+return (
     <PayPalButtons 
         disabled={cartItems.length < 1}
         style={{
@@ -39,6 +37,8 @@ const PaypalBtn = ({cartItems, totalAmount,clearCart}:PropType) => {
             if(hasAlreadyBoughtProduct){
                 setError('You already bought this product. Go to your account to view your list of products.');
                 console.log('onClick', error);
+                console.log(data);
+                
                 return actions.reject();
             }
             else {
@@ -46,7 +46,7 @@ const PaypalBtn = ({cartItems, totalAmount,clearCart}:PropType) => {
             }
         }}    
         createOrder={(data,actions )=>{
-
+            console.log(data);
             
             const checkout = actions.order.create({
                 purchase_units: [{
@@ -62,7 +62,7 @@ const PaypalBtn = ({cartItems, totalAmount,clearCart}:PropType) => {
             // it must capture the order to deduct the amount to the buyers account 
             // capture is a promise function therefore use async await
             const order = await actions?.order?.capture();
-            // console.log('order',order);
+            console.log(data);
             if(order?.status==='COMPLETED'){
                 setTimeout(()=>{
                     clearCart();
