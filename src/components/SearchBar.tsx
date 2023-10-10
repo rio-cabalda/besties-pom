@@ -40,6 +40,7 @@ const SearchBar = () => {
       setInputFocused(true);
       setSearchInput(searchInput);
       setSearch(searchInput);
+      //eslint-disable-next-line
     },[searchInput])
     
     const handleChange = (value:string) => {
@@ -74,7 +75,7 @@ const SearchBar = () => {
             {searchInput && isInputFocused &&  showedProducts.length > 1 ? <div className='w-[90%] bg-slate-100 absolute -bottom-[12px] right-1/2 md:w-[50%] translate-x-1/2 translate-y-[100%] rounded-lg'>
               <ul className='px-4 py-2 max-h-[200px] overflow-scroll'>
             
-                   {showedProducts.map((item)=>{
+                  {showedProducts.map((item)=>{
                     return (
                       <li key={item._id} className='py-2 border-b-[1px]  border-s-fuchsia-300'>
                         <Link to='products' onClick={()=>handleClick(item.name)}>
@@ -82,13 +83,10 @@ const SearchBar = () => {
                         </Link>
                       </li>)     
                   })}
-                
-                
-               
+
               </ul>
             </div> : null}
-            {searchInput ?  <button className='text-slate-500 text-lg hover:cursor-pointer hover:text-red-900 hover:scale-105 active:scale-100 duration-200' type='button' onClick={()=>setSearchInput('')}><IoClose /></button> : null}        
-           
+            {searchInput ?  <button className='text-slate-500 text-lg hover:cursor-pointer hover:text-red-900 hover:scale-105 active:scale-100 duration-200' type='button' onClick={()=>setSearchInput('')}><IoClose /></button> : null}
     </div>
   )
 }
