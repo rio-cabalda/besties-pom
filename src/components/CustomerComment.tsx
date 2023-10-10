@@ -2,10 +2,10 @@ import { FormEvent, useEffect, useState } from 'react'
 import { axiosInstance } from '../api/axiosConfig'
 import { AxiosError } from 'axios'
 import useAuthStore from '../store/authStore';
-import { CustomerRating } from '.';
+import { CustomerRating,StarRating } from '.';
 import { UserType } from '../types';
 import { useNavigate, useLocation } from "react-router-dom"
-import StarRating from './StarRating';
+
 import toast from 'react-hot-toast';
 
 type AuthType = {
