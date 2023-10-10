@@ -20,11 +20,11 @@ const Services = () => {
  
 
   return (
-    <section className="relative py-20 w-full flex flex-col justify-center items-center transform -translate-y-14 overflow-hidden">
+    <section className="relative py-20 w-full flex flex-col justify-center items-center transform -mt-7 z-0 overflow-hidden">
       <video ref={videoRef} className='absolute inset-0 w-full h-full object-cover bg-slate-200 bg-blend-overlay opacity-50' src={videoBg} autoPlay loop muted></video>
       {/* <div className='absolute inset-0 w-full h-full bg-black/40'></div> */}
       <SectionTitle title={'Purrfect Pet Services'} />
-      <div className="font-semibold text-slate-800 grid max-w-[400px] md:grid-cols-2 md:max-w-[700px] lg:grid-cols-3 lg:max-w-[900px] items-center gap-3 p-10 pt-5 ">
+      <div className="font-semibold text-slate-800 grid md:grid-cols-2  lg:grid-cols-3 lg:max-w-[70rem] lg:gap-10 items-center gap-3 p-4 pt-5 ">
 
         {services.map((item)=>{
           return (
