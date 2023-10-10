@@ -26,12 +26,12 @@ return (
             <span>{formatPrice(totalAmount)}</span>
             </div>
 
-            <div className="text-center">
-            <p className="py-5 text-left rounded-md bg-red-300 text-black my-5">
-            <span className="font-bold">Use this paypal acount for testing:</span> <br />
-            <span className="font-bold">Email</span>: sb-47qkay26821058@personal.example.com
+            <div className="text-center w-full">
+            <p className="w-full py-5 text-left rounded-md bg-red-300 text-black my-5 pr-1">
+            <span className="font-bold">Use this paypal account for testing:</span> <br />
+            <span className="font-bold">Email: </span>sb-47qkay26821058@personal.example.com
             <br />
-            <span className="font-bold">Password</span>: {'YSJ[4p/4'}
+            <span className="font-bold">Password: </span>{'YSJ[4p/4'}
             </p>
             {totalAmount > 0 ? <PaypalBtn totalAmount={totalAmount} clearCart={clearCart} cartItems={cartItems}/>:null}
             </div>
