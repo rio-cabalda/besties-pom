@@ -19,7 +19,7 @@ const FeaturedProducts = () => {
 
   if(isLoading){
     return (
-      <section className='w-full pt-10 md:pt-14 bg-[rgb(241,245,248)] -skew-y-3 -translate-y-6 md:-skew-y-2 lg:-translate-y-7'>
+      <section className='w-full pt-16 md:pt-14 transform bg-[rgb(241,245,248)] -skew-y-3 -mt-8 md:-skew-y-2 lg: z-10 overflow-hidden'>
           <article className='skew-y-3 md:skew-y-2 my-6 pb-10 flex flex-col justify-center items-center'>
             <SectionTitle title={'Explore a Pawsome Collection of Pet Products'}/>
             <div className="mt-20 mb-48 w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
 
   if(isError){
     return (
-      <section className='w-full pt-10 md:pt-14 bg-[rgb(241,245,248)] -skew-y-3 -translate-y-6 md:-skew-y-2 lg:-translate-y-7'>
+      <section className='w-full pt-16 md:pt-14 transform bg-[rgb(241,245,248)] -skew-y-3 -mt-8 md:-skew-y-2 lg: z-10 overflow-hidden'>
         <article className='skew-y-3 md:skew-y-2 my-6 pb-10 flex flex-col justify-center items-center'>
           <SectionTitle title={'Explore a Pawsome Collection of Pet Products'}/>
               <div className="mb-48 flex-1 w-full text-red-400  p-4 flex flex-col justify-center items-center">
@@ -43,10 +43,10 @@ const FeaturedProducts = () => {
     )}      
     
   return (
-    <section className='w-full pt-10 md:pt-14 bg-[rgb(241,245,248)] -skew-y-3 -translate-y-6 md:-skew-y-2 lg:-translate-y-7 z-10'>
-        <article className='skew-y-3 md:skew-y-2 my-6 pb-10 flex flex-col justify-center items-center'>
+    <section className='w-full pt-16 md:pt-14 transform bg-[rgb(241,245,248)] -skew-y-3 -mt-8 md:-skew-y-2 lg: z-10 overflow-hidden'>
+        <article className='skew-y-3 md:skew-y-2 pb-10 flex flex-col justify-center items-center'>
           <SectionTitle title={'Explore a Pawsome Collection of Pet Products'}/>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 overflow-hidden">
+          <div className="w-full grid sm:grid-cols-2 md:grid-cols-4 gap-4 px-4 md:p-4 overflow-hidden">
             {featuredProducts.map((item:ProductItemType)=>(<Product key={item._id} item={item}/>))}
           </div>
 
