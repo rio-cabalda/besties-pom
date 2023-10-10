@@ -4,13 +4,13 @@ import errorImage from '../assets/sad_dog.png';
 import product from '../assets/product.png';
 import { useFormatPrice } from "../hooks";
 import { SingleProductType } from "../types";
-import {AddToCart, RelatedProducts, CustomerRating} from "../components";
+import {AddToCart, RelatedProducts, CustomerRating, CustomerComment} from "../components";
 import { useEffect, useState } from "react";
 import axiosPrivate from "../api/axiosConfig";
 import { AxiosError } from "axios";
 import useCheckAuthUser from "../api/checkAuthUser";
 import useAuthStore from "../store/authStore";
-import CustomerComment from "../components/CustomerComment";
+import {BiArrowBack} from 'react-icons/bi'
 
 const SingleProduct = () => {
   const navigate = useNavigate();
@@ -59,9 +59,9 @@ const SingleProduct = () => {
   const addToCart = async() => {
     setIsSubmitting(true);
     try {
-      const addItem = await axiosPrivate.post(`/user/cart/${_id}`,{quantity:quantity});
-      console.log(addItem);
+      await axiosPrivate.post(`/user/cart/${_id}`,{quantity:quantity});
       setIsSubmitting(false);
+      navigate(`/cart/${_id}`);
     } catch (error) {
       const axiosError = error as AxiosError;
       if(axiosError.response?.status === 401){
@@ -96,8 +96,10 @@ if(isError){
   
   return (
     <div className="max-w-screen-xl mx-auto pt-10">
-      <div className="py-5 lg:py-10 px-5 lg:px-043">
-        <Link to='/products' className="bg-blue-300 px-10 py-2 rounded-md">BACK</Link>
+      <div className="py-5 lg:py-10 px-5 lg:px-0 ">
+      <Link to='/products' className="inline-block">
+        <div className="bg-sky-500 px-10 py-2 w-fit rounded-md text-2xl text-slate-100 hover:bg-sky-400 duration-200 active:bg-sky-500"><BiArrowBack /></div>  
+      </Link>
       </div>
       <div className="bg-white w-full grid grid-cols-1 px-5 lg:px-0 lg:grid-cols-2 lg:gap-16">
           <section className="w-full">
