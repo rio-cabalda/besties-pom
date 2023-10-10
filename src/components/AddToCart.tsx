@@ -10,7 +10,7 @@ type PropType ={
     setQuantity: (newValue: number | ((prevQuantity: number) => number)) => void;
 }
 
-const AddToCart:React.FC<PropType> = ({product, addToCart, isSubmitting,quantity,setQuantity}) => {
+const AddToCart:React.FC<PropType> = ({product, addToCart, isSubmitting, quantity,setQuantity}) => {
     const {stock} = product;
 
     const increase = () => {
