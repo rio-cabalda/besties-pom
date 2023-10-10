@@ -1,5 +1,5 @@
 import { SignUp, SignIn } from "./pages/auth";
-import { Navbar } from "./components";
+import { Navbar, Footer } from "./components";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home,Products, Error, SingleProduct, PrivateRoute, About, ShoppingCart } from "./pages";
 import { useProductStore } from "./store/productStore";
@@ -17,7 +17,7 @@ function App() {
       <PayPalScriptProvider options={{clientId: REACT_APP_PAYPAL_CLIENT_ID, currency: "PHP"}}>
       <BrowserRouter>
         <Navbar/>
-          <main style={divStyle}>
+          <main style={divStyle} className="min-h-screen">
             <Routes>
               <Route path="/" element={<Home />}/>
               <Route path='about' element={<About/>} />
@@ -33,7 +33,7 @@ function App() {
               <Route path='*' element={<Error />} />
             </Routes>
           </main>
-          {/* <Footer /> */}
+          <Footer />
         </BrowserRouter>
     </PayPalScriptProvider>    
     </div>
