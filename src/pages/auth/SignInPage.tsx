@@ -140,8 +140,10 @@ const SignInPage = () => {
               </div>
             </div>
 
-            <button disabled={isSubmitting} className='mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-              {isSubmitting? <span className='animate-bouncingText'>Signing in...</span>: 'Sign in'}
+            <button disabled={isSubmitting} className='mt-6 flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+              {isSubmitting? <span>Signing in<div className="inline-block ml-2 h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-white  motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    </div></span>: 'Sign in'}
               </button>
           </form>
 
@@ -163,7 +165,7 @@ const SignInPage = () => {
 
         </div>
 
-        <div className='hidden h-[40rem] w-[500px] lg:flex rounded-r-lg overflow-hidden bg-red-500'>
+        <div className='hidden h-[40rem] w-[500px] lg:flex rounded-r-lg overflow-hidden'>
           
           <img className='h-full w-full object-cover' src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1924&q=80" alt="Sign up image" />  
         </div>
