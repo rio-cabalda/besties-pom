@@ -8,16 +8,19 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 function App() {
   const {navHeight} = useProductStore(); //height of nav(fixed position) use to margin top
   const divStyle = {
-    marginTop: `${navHeight}px`
+    marginTop: `${navHeight}px`,
   };
+
   const REACT_APP_PAYPAL_CLIENT_ID = "AfjoQrA6n7QRRuRJk8dyX81OOhuRMbUbfY77JQ_ax0sfNT_-yQ8ypqyKvvVrFfI87y6dx_k8VTHnvEM2";
   
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <main>
+      
+    <div className="max-w-screen-xl mx-auto" style={{minHeight:'calc(100vh - 9rem)'}}>
       <PayPalScriptProvider options={{clientId: REACT_APP_PAYPAL_CLIENT_ID, currency: "PHP"}}>
       <BrowserRouter>
         <Navbar/>
-          <main style={divStyle} className="min-h-screen">
+          <div style={divStyle}>
             <Routes>
               <Route path="/" element={<Home />}/>
               <Route path='about' element={<About/>} />
@@ -32,11 +35,12 @@ function App() {
               } />
               <Route path='*' element={<Error />} />
             </Routes>
-          </main>
-          <Footer />
+          </div>
         </BrowserRouter>
     </PayPalScriptProvider>    
     </div>
+    <Footer />
+    </main>
   )
 }
 
