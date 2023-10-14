@@ -13,11 +13,12 @@ import toast  from 'react-hot-toast';
 import axios, { AxiosError } from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useCheckAuthUser from '../../api/checkAuthUser';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const SignInPage = () => {
   const { visible, togglePasswordVisibility, inputType } = usePasswordToggle();
   const { fetchUser, isAuthenticated} = useAuthStore();
+  const [loadingGuest, setLoadingGuest] = useState(false);
   const checkUser = useCheckAuthUser();
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,6 +46,7 @@ const SignInPage = () => {
     resolver: zodResolver(signInSchema)
   });
 
+
   const onSubmit = async(data: TSignInSchema) =>{
     try {
       const response = await axiosInstance.post('/user/login', data);
@@ -55,12 +57,12 @@ const SignInPage = () => {
         localStorage.setItem(StorageEnum.StorageString, accessToken);
         const resUser = await axiosPrivate.get('/user/auth');
         const {user} = resUser.data;
-         fetchUser(user);
+        fetchUser(user);
         toast.success(<b>Successfully logged in!</b>,{duration: 3000});
         navigate(from);
       } else {
         toast.error(<b>{response?.data?.error ? response.data.error:'Login failed'}</b>);
-       }
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // Check if it's an Axios error
@@ -69,9 +71,9 @@ const SignInPage = () => {
           // Access the status code
           const statusCode = axiosError.response.status;
           if(statusCode === 401){
-             toast.error(<b>Incorrect Password</b>);
+            toast.error(<b>Incorrect Password</b>);
           }else{
-             toast.error(<b>Login failed</b>);
+            toast.error(<b>Login failed</b>);
           }
         }
       } else {
@@ -80,6 +82,21 @@ const SignInPage = () => {
       }
     } 
     reset();
+  }
+
+  const onSubmitGuest = async() => {
+    const guestAccount = {
+        email: "guest@gmail.com",
+        password: "Guest@123",
+    }
+    setLoadingGuest(true);
+    try {
+      await onSubmit(guestAccount);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      throw new Error(axiosError.message);
+    }finally{setLoadingGuest(false);}
+    
   }
 
   if(isAuthenticated){
@@ -92,17 +109,12 @@ const SignInPage = () => {
   return (
     <section className='bg-gradient-to-r from-sky-300 to-sky-500 h-screen w-full pt-16 flex'>
       <div className='flex mx-auto rounded-lg h-fit shadow-md'>  
-        <div className='flex-none relative rounded-l-lg rounded-r-lg w-[350px] mobile-400:w-[400px] md:w-[500px] lg:rounded-r-none  py-12 px-5 text-xs bg-white flex items-center flex-col'>
+        <div className='flex-none relative rounded-l-lg rounded-r-lg w-[350px] mobile-400:w-[400px] md:w-[500px] lg:rounded-r-none  pt-12 px-5 text-xs bg-white flex items-center flex-col'>
 
           <div className='absolute flex justify-center items-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-500 h-20 w-20 border-transparent border-none rounded-full overflow-hidden'>
             <SiDatadog className='text-white w-14 h-14'/>
           </div>
               <h1 className='text-lg font-bold text-sky-700'>Sign in</h1>
-              <div className='bg-red-400 p-4 rounded-md'>
-                <h3 className='font-bold'>Use Guest Account to login immediately</h3>
-                <p >Email: <span className='font-semibold'>guest@gmail.com</span></p>
-                <p>Password: <span className='font-semibold'>Guest@123</span></p>
-              </div>
           <form onSubmit={handleSubmit(onSubmit)} className='w-full flex pt-10 flex-col justify-center text-lg gap-2'>
 
             <div className='mt-3 relative flex flex-col'>
@@ -147,29 +159,30 @@ const SignInPage = () => {
               {isSubmitting? <span>Signing in<div className="inline-block ml-2 h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-white  motion-reduce:animate-[spin_1.5s_linear_infinite]"
                     role="status">
                     </div></span>: 'Sign in'}
-              </button>
+            </button>
           </form>
+          <button disabled={loadingGuest} onClick={onSubmitGuest} className='w-full mt-2 flex items-center justify-center bg-gray-200 text-slate-700 font-bold text-lg hover:bg-blue-300 active:bg-gray-200 py-2 px-4 rounded'>
+              {loadingGuest? <span>Signing in<div className="inline-block ml-2 h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-white  motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    </div></span>: 'Signing in as Guest'}
+            </button>
 
             {/* Horizontal line */}
-            <div className="flex w-80 items-center mt-10 py-4">
+            <div className="flex w-80 items-center mt-10 ">
                 <div className="flex-grow h-[1px] bg-gray-400"></div> 
                 <span className="flex-shrink text-sm text-gray-500 px-4">Sign in with</span>
                 <div className="flex-grow h-[1px] bg-gray-400"></div>
             </div>
             {/* Sign in with Google, Facebook, Github */}
           <div>
-            <div className='flex gap-4'>
+            <div className='flex gap-4 mt-3'>
             <AiFillGooglePlusCircle className='text-3xl text-red-500'/>
             <AiOutlineGithub className='text-3xl'/>
             <BiLogoFacebookCircle className='text-3xl text-blue-900'/>
             </div>
-            
           </div>
-
         </div>
-
-        <div className='hidden h-[40rem] w-[500px] lg:flex rounded-r-lg overflow-hidden'>
-          
+        <div className='hidden h-[35rem] w-[500px] lg:flex rounded-r-lg overflow-hidden'>
           <img className='h-full w-full object-cover' src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1924&q=80" alt="Sign up image" />  
         </div>
       </div>
