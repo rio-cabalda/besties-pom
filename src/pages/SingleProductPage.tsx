@@ -96,14 +96,16 @@ if(isError){
   
   return (
     <div className="max-w-screen-xl mx-auto pt-10">
-      <div className="py-5 lg:py-10 px-5 lg:px-0 ">
-      <Link to='/products' className="inline-block">
-        <div className="bg-sky-500 px-10 py-2 w-fit rounded-md text-2xl text-slate-100 hover:bg-sky-400 duration-200 active:bg-sky-500"><BiArrowBack /></div>  
-      </Link>
-      </div>
+      
       <div className="bg-white w-full grid grid-cols-1 px-5 lg:px-0 lg:grid-cols-2 lg:gap-16">
-          <section className="w-full">
-            <div className="relative w-full h-[30rem] p-5 rounded-lg shadow-lg overflow-hidden">
+        
+          <section className=" w-full">
+            <div className="py-5 lg:py-1 px-5 lg:px-0 ">
+                <Link to='/products' className="block bg-transparent lg:px-10 mt-3 w-fit rounded-md text-2xl text-blue-600  duration-200 active:bg-sky-500">
+                  <div className=""><BiArrowBack /></div>  
+                </Link>
+              </div>
+            <div className="relative w-full h-[30rem] lg:m-5 lg:mr-0 rounded-lg shadow-lg overflow-hidden">
               {image ? 
               <img className="w-full h-full object-contain" src={image} alt={name} /> 
               : 
