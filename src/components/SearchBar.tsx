@@ -72,12 +72,12 @@ const SearchBar = () => {
             placeholder='search product' 
             autoComplete='off'
             />
-            {searchInput && isInputFocused &&  showedProducts.length > 1 ? <div className='w-[90%] bg-slate-100 absolute -bottom-[12px] right-1/2 md:w-[50%] translate-x-1/2 translate-y-[100%] rounded-lg'>
-              <ul className='px-4 py-2 max-h-[200px] overflow-scroll'>
+            {searchInput && isInputFocused &&  showedProducts.length > 1 ? <div className='w-[90%] bg-blue-100 absolute -bottom-[12px] right-1/2 md:w-[50%] translate-x-1/2 translate-y-[100%] rounded-lg'>
+              <ul className='max-h-[200px] overflow-y-scroll p-1'>
             
-                  {showedProducts.map((item)=>{
+                  {showedProducts.map((item,i)=>{
                     return (
-                      <li key={item._id} className='py-2 border-b-[1px]  border-s-fuchsia-300'>
+                      <li key={item._id} className={`px-4 py-2 ${showedProducts.length-1 === i? 'border-none':'border-b-[1px]'} border-s-fuchsia-300 hover:bg-sky-200 accent-transparent active:bg-sky-300`}>
                         <Link to='products' className='block' onClick={()=>handleClick(item.name)}>
                           {item.name}
                         </Link>
