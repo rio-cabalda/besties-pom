@@ -78,7 +78,7 @@ const SearchBar = () => {
                   {showedProducts.map((item)=>{
                     return (
                       <li key={item._id} className='py-2 border-b-[1px]  border-s-fuchsia-300'>
-                        <Link to='products' onClick={()=>handleClick(item.name)}>
+                        <Link to='products' className='block' onClick={()=>handleClick(item.name)}>
                           {item.name}
                         </Link>
                       </li>)     
