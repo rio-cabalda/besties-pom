@@ -18,7 +18,7 @@ function App() {
       
     <div className="max-w-screen-xl mx-auto" style={{minHeight:'calc(100vh - 9rem)'}}>
       <PayPalScriptProvider options={{clientId: REACT_APP_PAYPAL_CLIENT_ID, currency: "PHP"}}>
-      <BrowserRouter>
+      <BrowserRouter basename="https://bestiespom.netlify.app/">
         <Navbar/>
           <div style={divStyle}>
             <Routes>
