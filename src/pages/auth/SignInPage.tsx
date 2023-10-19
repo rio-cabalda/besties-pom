@@ -11,7 +11,7 @@ import useAuthStore from '../../store/authStore';
 import axiosPrivate, {axiosInstance} from '../../api/axiosConfig';
 import toast  from 'react-hot-toast';
 import axios, { AxiosError } from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import useCheckAuthUser from '../../api/checkAuthUser';
 import { useEffect, useState } from 'react';
 
@@ -115,7 +115,7 @@ const SignInPage = () => {
             <SiDatadog className='text-white w-14 h-14'/>
           </div>
               <h1 className='text-lg font-bold text-sky-700'>Sign in</h1>
-          <form onSubmit={handleSubmit(onSubmit)} className='w-full flex pt-10 flex-col justify-center text-lg gap-2'>
+          <form onSubmit={handleSubmit(onSubmit)} className='w-full flex pt-3 lg:pt-6 flex-col justify-center text-lg gap-2'>
 
             <div className='mt-3 relative flex flex-col'>
               <input 
@@ -167,15 +167,19 @@ const SignInPage = () => {
                     </div></span>: 'Signing in as Guest'}
             </button>
 
+            <div className='text-sm mt-2 '>
+              <p>Not a member yet? <Link to="/signup" className='text-blue-500'>Register</Link></p>
+            </div>
+
             {/* Horizontal line */}
-            <div className="flex w-80 items-center mt-10 ">
+            <div className="flex w-80 items-center mt-6 ">
                 <div className="flex-grow h-[1px] bg-gray-400"></div> 
                 <span className="flex-shrink text-sm text-gray-500 px-4">Sign in with</span>
                 <div className="flex-grow h-[1px] bg-gray-400"></div>
             </div>
             {/* Sign in with Google, Facebook, Github */}
           <div>
-            <div className='flex gap-4 mt-3'>
+            <div className='flex gap-4 my-3'>
             <AiFillGooglePlusCircle className='text-3xl text-red-500'/>
             <AiOutlineGithub className='text-3xl'/>
             <BiLogoFacebookCircle className='text-3xl text-blue-900'/>
