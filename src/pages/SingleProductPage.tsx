@@ -30,9 +30,6 @@ const SingleProduct = () => {
   const {id=''} = useParams();
   const {singleProduct=defaultSingleProduct, isLoading, isError}:SingleProductType = useSingleProduct(id);
   const { _id,name, image, description, category, price, rating, stock} = singleProduct;
-  // const [] = useState();
-  // const [isLoading] = useState();
-  // const [] = useState();
   const {isAuthenticated,setlogoutUser} = useAuthStore();
   const formatedPrice = useFormatPrice(price);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
