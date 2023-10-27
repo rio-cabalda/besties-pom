@@ -1,4 +1,4 @@
- import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsBag } from 'react-icons/bs';
 import useAuthStore from '../store/authStore';
 import checkAuthUser from '../api/checkAuthUser';
@@ -10,15 +10,24 @@ import { CgCloseO } from 'react-icons/cg';
 const NavCart = () => {
   const checkUser = checkAuthUser();
   const {user, isAuthenticated, setlogoutUser} = useAuthStore();
+  const [cartNumber, setCartNumber] = useState(0);
   const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
   const [loggingOut, setLoggingOut] = useState<boolean>(false);
   const navigate = useNavigate();
+
   useEffect(()=>{
     checkUser
     setUserMenuOpen(false);
+    if(user?.cart){
+      setCartNumber(user.cart.length);
+    }
+    else{
+      setCartNumber(0);
+    }
   }
-   // eslint-disable-next-line
-  ,[]);
+  ,[checkUser,user]);
+
+
   
   const logoutUser = async() =>{
     setLoggingOut(true);
@@ -42,7 +51,7 @@ const NavCart = () => {
               <div className='hidden md:block'>
                 <Link to={`cart/${user?._id}`} className='relative flex justify-center items-center text-xl'>
                   <BsBag />
-                  <span className='absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-xs font-medium leading-0 leading-none flex items-center px-0.5'>10</span>
+                  <span className='absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-xs font-medium leading-0 leading-none flex items-center px-0.5'>{cartNumber}</span>
                 </Link>
               </div>
               <div className='w-10 h-10 rounded-full overflow-hidden cursor-pointer' onClick={()=>setUserMenuOpen(!userMenuOpen)}>
