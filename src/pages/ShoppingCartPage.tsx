@@ -54,6 +54,7 @@ const ShoppingCart = () => {
         }finally{
             setfetchLoading(false);
             setBtnIdex(null);
+            checkUser;
         }
     }
 
