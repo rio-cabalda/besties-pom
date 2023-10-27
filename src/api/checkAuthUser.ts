@@ -4,7 +4,7 @@ import useAuthStore from "../store/authStore";
 // import { AxiosError } from "axios";
 
 const useCheckAuthUser = () =>{
-    const { fetchUser, setlogoutUser }=useAuthStore();
+    const { fetchUser, setlogoutUser } = useAuthStore();
     //check if the token is available or valid;
     useEffect(()=>{
         const getUser = async() =>{
@@ -16,7 +16,6 @@ const useCheckAuthUser = () =>{
             setlogoutUser();
             // const axiosError = error as AxiosError;
             // throw new Error(axiosError.response?.data?.error)
-            
         }
       }
         getUser();
