@@ -172,19 +172,19 @@ const SignInPage = () => {
             </div>
 
             {/* Horizontal line */}
-            <div className="flex w-80 items-center mt-6 ">
+            {/* <div className="flex w-80 items-center mt-6 ">
                 <div className="flex-grow h-[1px] bg-gray-400"></div> 
                 <span className="flex-shrink text-sm text-gray-500 px-4">Sign in with</span>
                 <div className="flex-grow h-[1px] bg-gray-400"></div>
-            </div>
+            </div> */}
             {/* Sign in with Google, Facebook, Github */}
-          <div>
+          {/* <div>
             <div className='flex gap-4 my-3'>
             <AiFillGooglePlusCircle className='text-3xl text-red-500'/>
             <AiOutlineGithub className='text-3xl'/>
             <BiLogoFacebookCircle className='text-3xl text-blue-900'/>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className='hidden h-[35rem] w-[500px] lg:flex rounded-r-lg overflow-hidden'>
           <img className='h-full w-full object-cover' src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1924&q=80" alt="Sign up image" />  
