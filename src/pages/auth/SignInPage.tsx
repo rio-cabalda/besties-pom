@@ -1,8 +1,8 @@
 import { usePasswordToggle } from '../../hooks';
 import { SiDatadog } from 'react-icons/si';
 import { BiSolidHide, BiShow } from 'react-icons/bi';
-import {AiOutlineGithub, AiFillGooglePlusCircle} from 'react-icons/ai';
-import {BiLogoFacebookCircle} from 'react-icons/bi';
+// import {AiOutlineGithub, AiFillGooglePlusCircle} from 'react-icons/ai';
+// import {BiLogoFacebookCircle} from 'react-icons/bi';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TSignInSchema,signInSchema } from '../../types/SignInTypes';
@@ -150,7 +150,7 @@ const SignInPage = () => {
               <label htmlFor="password"
               className='absolute text-base text-slate-500 h-2 border-transparent left-2 -top-[3px] transition-all bg-white px-1 duration peer-placeholder-shown:scale-100 peer-placeholder-shown:top-6 peer-placeholder-shown:left-2 peer-placeholder-shown:text-slate-500 peer-placeholder-shown: border-x-2 peer-placeholder-shown: border-x-transparent peer-placeholder-shown:text-[16px] peer-focus:text-base peer-focus:-top-[3px] peer-focus:scale-100 border-sky-500 peer-focus:text-slate-500 peer-focus:left-2 peer-focus:border-x-2 peer-focus:border-sky-500 flex items-center peer-focus:h-2'
               >Password</label>
-               <div className='min-h-[2rem] w-full px-2'>
+              <div className='min-h-[2rem] w-full px-2'>
                 {errors.password ? ( <span className='text-red-500 text-sm transition-all duration-200'>{errors.password.message}</span>):null}
               </div>
             </div>
